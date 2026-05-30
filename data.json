@@ -1,0 +1,33 @@
+{
+  "nom": "Petit Sudiste 13",
+  "annonce": {
+    "tag": "Bienvenue",
+    "texte": "Bienvenue dans l'appartement ! Tout est prêt pour votre séjour. Bonne détente 🌿"
+  },
+  "wifi": {
+    "ssid": "PetitSudiste_5G",
+    "password": "motdepasse"
+  },
+  "checkout": "Samedi 10h — laisser les clés sur la table",
+  "infos": [
+    { "label": "Urgence", "valeur": "06 XX XX XX XX" },
+    { "label": "Parking", "valeur": "Place n°1" },
+    { "label": "Poubelles", "valeur": "Lundi matin" },
+    { "label": "Chauffage", "valeur": "Télécommande salon" }
+  ],
+  "regles": [
+    { "ok": true,  "texte": "Animaux acceptés (extérieur)" },
+    { "ok": true,  "texte": "Fumeur autorisé en terrasse" },
+    { "ok": false, "texte": "Pas de fêtes / musique après 22h" },
+    { "ok": false, "texte": "Pas de chaussures dans l'appartement" }
+  ],
+  "sections": {
+    "meteo": true,
+    "wifi": true,
+    "regles": true,
+    "infos": true
+  },
+  "ville": "Velaux",
+  "lat": "43.5281",
+  "lon": "5.2483"
+}
