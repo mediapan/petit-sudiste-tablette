@@ -539,34 +539,11 @@
   // Rechargement toutes les 30 secondes
   setInterval(loadData, 30000);
 
-  // Confirmation alerte par le locataire
+  // Confirmation alerte par le locataire (sans token)
   function confirmerAlerte() {
-    const now = new Date();
-    const lu = now.toLocaleDateString('fr-FR') + ' à ' + now.toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'});
-
-    // Cache immédiatement
-    document.getElementById('alerte-overlay').classList.remove('active');
     const msgActuel = document.getElementById('alerte-message').textContent;
+    document.getElementById('alerte-overlay').classList.remove('active');
     sessionStorage.setItem('alerte_confirmee_msg', msgActuel);
-
-    // Écrit lu_le dans data.json via GitHub
-    const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/data.json`;
-    const token  = atob('Z2hwX2lIRkl2M1hFMlJxOU5vSW5BVUhZSEZqUDl2SUUwajAyYjZNVw==');
-
-    fetch(DATA_URL + '?t=' + Date.now())
-      .then(r => r.json())
-      .then(d => {
-        d.alerte.lu_le = lu;
-        const content = btoa(unescape(encodeURIComponent(JSON.stringify(d, null, 2))));
-        return fetch(apiUrl, { headers: { Authorization: `token ${token}` } })
-          .then(r => r.json())
-          .then(meta => fetch(apiUrl, {
-            method: 'PUT',
-            headers: { Authorization: `token ${token}`, 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: 'Alerte lue', content, sha: meta.sha })
-          }));
-      })
-      .catch(() => console.log('Erreur écriture lu_le'));
   }
 </script>
 </body>
