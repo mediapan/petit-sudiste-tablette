@@ -310,6 +310,24 @@
     to   { width: 0%; }
   }
 
+  .alerte-confirm-btn {
+    margin-top: 36px;
+    padding: 16px 48px;
+    background: white;
+    color: #c0392b;
+    border: none;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    transition: transform 0.1s, opacity 0.1s;
+  }
+
+  .alerte-confirm-btn:active { transform: scale(0.97); opacity: 0.9; }
+
   /* BOUTON JEUX */
   .jeux-btn {
     display: inline-flex;
@@ -338,6 +356,7 @@
   <div class="alerte-icon">🚨</div>
   <div class="alerte-titre">Message urgent</div>
   <div class="alerte-message" id="alerte-message"></div>
+  <button class="alerte-confirm-btn" id="alerte-confirm-btn" onclick="confirmerAlerte()">✓ J'ai compris</button>
   <div class="alerte-bar" id="alerte-bar"></div>
 </div>
 
@@ -499,13 +518,13 @@
 
         // ALERTE URGENTE
         const overlay = document.getElementById('alerte-overlay');
-        if (d.alerte && d.alerte.active && d.alerte.message) {
+        const dejaConfirmee = sessionStorage.getItem('alerte_confirmee');
+        if (d.alerte && d.alerte.active && d.alerte.message && !dejaConfirmee) {
           document.getElementById('alerte-message').textContent = d.alerte.message;
           overlay.classList.add('active');
-          // Reset animation barre
           const bar = document.getElementById('alerte-bar');
           bar.style.animation = 'none';
-          bar.offsetHeight; // reflow
+          bar.offsetHeight;
           bar.style.animation = 'progress 30s linear forwards';
         } else {
           overlay.classList.remove('active');
@@ -517,6 +536,24 @@
   loadData();
   // Rechargement toutes les 30 secondes
   setInterval(loadData, 30000);
+
+  // Confirmation alerte par le locataire
+  function confirmerAlerte() {
+    const now = new Date();
+    const lu = now.toLocaleDateString('fr-FR') + ' à ' + now.toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'});
+    // Enregistre dans data.json via GitHub
+    fetch(`https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/main/data.json?t=` + Date.now())
+      .then(r => r.json())
+      .then(d => {
+        d.alerte.lu_le = lu;
+        d.alerte.active = false;
+        // On ne peut pas écrire sans token depuis la tablette — on cache juste localement
+      });
+    // Cache l'alerte localement immédiatement
+    document.getElementById('alerte-overlay').classList.remove('active');
+    // Stocke en sessionStorage pour ne pas la réafficher
+    sessionStorage.setItem('alerte_confirmee', lu);
+  }
 </script>
 </body>
 </html>
