@@ -519,9 +519,9 @@
 
         // ALERTE URGENTE
         const overlay = document.getElementById('alerte-overlay');
-        const derniereAlerte = sessionStorage.getItem('alerte_confirmee_msg');
         const messageActuel = d.alerte && d.alerte.message ? d.alerte.message : '';
-        if (d.alerte && d.alerte.active && messageActuel && derniereAlerte !== messageActuel) {
+        const confirmeMsg = localStorage.getItem('alerte_confirmee_msg');
+        if (d.alerte && d.alerte.active && messageActuel && confirmeMsg !== messageActuel) {
           document.getElementById('alerte-message').textContent = messageActuel;
           overlay.classList.add('active');
           const bar = document.getElementById('alerte-bar');
@@ -543,7 +543,7 @@
   function confirmerAlerte() {
     const msgActuel = document.getElementById('alerte-message').textContent;
     document.getElementById('alerte-overlay').classList.remove('active');
-    sessionStorage.setItem('alerte_confirmee_msg', msgActuel);
+    localStorage.setItem('alerte_confirmee_msg', msgActuel);
   }
 </script>
 </body>
