@@ -56,6 +56,6 @@
   "lon": "5.2483",
   "alerte": {
     "active": true,
-    "message": "BRUIT trop fort. merci"
+    "message": "BRUIT trop fort. merci."
   }
 }
