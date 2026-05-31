@@ -29,7 +29,7 @@
   ],
   "regles": [
     {
-      "ok": true,
+      "ok": false,
       "texte": "Animaux acceptés (extérieur)"
     },
     {
