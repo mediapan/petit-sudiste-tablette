@@ -33,15 +33,15 @@
       "texte": "Animaux acceptés (extérieur)"
     },
     {
-      "ok": false,
+      "ok": true,
       "texte": "Fumeur autorisé en terrasse"
     },
     {
-      "ok": false,
+      "ok": true,
       "texte": "Pas de fêtes / musique après 22h"
     },
     {
-      "ok": false,
+      "ok": true,
       "texte": "Pas de chaussures dans l'appartement"
     }
   ],
@@ -56,6 +56,6 @@
   "lon": "5.2483",
   "alerte": {
     "active": true,
-    "message": "BRUIT trop fo"
+    "message": "BRUIT trop fortt"
   }
 }
