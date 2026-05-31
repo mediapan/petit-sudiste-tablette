@@ -350,6 +350,8 @@
 
   .jeux-btn:hover { background: rgba(201,169,110,0.2); }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>emailjs.init('V4odHXmxPiUAdZLss');</script>
 </head>
 <body>
 <!-- ALERTE URGENTE -->
@@ -544,9 +546,18 @@
   function confirmerAlerte() {
     const msgActuel = document.getElementById('alerte-message').textContent;
     document.getElementById('alerte-overlay').classList.remove('active');
-    // Cookie valable 7 jours
+
+    // Cookie 7 jours
     const expire = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toUTCString();
     document.cookie = `alerte_msg=${encodeURIComponent(msgActuel)}; expires=${expire}; path=/`;
+
+    // Envoi email via EmailJS
+    const now = new Date();
+    const date = now.toLocaleDateString('fr-FR') + ' à ' + now.toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'});
+    emailjs.send('service_oawv7mi', 'template_sjlsw9s', {
+      message: msgActuel,
+      date: date
+    }).catch(() => console.log('Email non envoyé'));
   }
 </script>
 </body>
