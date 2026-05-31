@@ -55,7 +55,7 @@
   "lat": "43.5281",
   "lon": "5.2483",
   "alerte": {
-    "active": false,
+    "active": true,
     "message": "alerte !"
   }
 }
