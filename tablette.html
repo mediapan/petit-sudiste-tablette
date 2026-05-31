@@ -542,18 +542,29 @@
   function confirmerAlerte() {
     const now = new Date();
     const lu = now.toLocaleDateString('fr-FR') + ' à ' + now.toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'});
-    // Enregistre dans data.json via GitHub
-    fetch(`https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/main/data.json?t=` + Date.now())
+
+    // Cache immédiatement
+    document.getElementById('alerte-overlay').classList.remove('active');
+    sessionStorage.setItem('alerte_confirmee', lu);
+
+    // Écrit lu_le dans data.json via GitHub
+    const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/data.json`;
+    const token  = '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';
+
+    fetch(DATA_URL + '?t=' + Date.now())
       .then(r => r.json())
       .then(d => {
         d.alerte.lu_le = lu;
-        d.alerte.active = false;
-        // On ne peut pas écrire sans token depuis la tablette — on cache juste localement
-      });
-    // Cache l'alerte localement immédiatement
-    document.getElementById('alerte-overlay').classList.remove('active');
-    // Stocke en sessionStorage pour ne pas la réafficher
-    sessionStorage.setItem('alerte_confirmee', lu);
+        const content = btoa(unescape(encodeURIComponent(JSON.stringify(d, null, 2))));
+        return fetch(apiUrl, { headers: { Authorization: `token ${token}` } })
+          .then(r => r.json())
+          .then(meta => fetch(apiUrl, {
+            method: 'PUT',
+            headers: { Authorization: `token ${token}`, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: 'Alerte lue', content, sha: meta.sha })
+          }));
+      })
+      .catch(() => console.log('Erreur écriture lu_le'));
   }
 </script>
 </body>
