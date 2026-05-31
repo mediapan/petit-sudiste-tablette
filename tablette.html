@@ -554,7 +554,7 @@
     // Envoi email via EmailJS
     const now = new Date();
     const date = now.toLocaleDateString('fr-FR') + ' à ' + now.toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'});
-    emailjs.send('service_oawv7mi', 'template_sjlsw9s', {
+    emailjs.send('service_oawv7mi', 'template_wuz31w9', {
       message: msgActuel,
       date: date
     }).catch(() => console.log('Email non envoyé'));
