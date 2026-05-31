@@ -8,7 +8,7 @@
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap');
 
   /* ===== CONFIGURATION ===== */
-  /* Remplace "mediapan" et "petit-sudiste-tablette" par les tiens */
+  /* Remplace "TON_GITHUB_USERNAME" et "TON_REPO_NAME" par les tiens */
   /* ========================= */
 
   :root {
@@ -244,6 +244,27 @@
 
   /* HIDDEN */
   .hidden { display: none !important; }
+
+  /* BOUTON JEUX */
+  .jeux-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(201,169,110,0.12);
+    border: 1px solid rgba(201,169,110,0.3);
+    color: var(--accent);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 20px;
+    border-radius: 24px;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background 0.15s;
+  }
+
+  .jeux-btn:hover { background: rgba(201,169,110,0.2); }
 </style>
 </head>
 <body>
@@ -293,6 +314,7 @@
   <div class="bottom-bar">
     <div class="checkout-text">Check-out : <strong id="checkout-text">---</strong></div>
     <div class="infos-row" id="infos-row"></div>
+    <a class="jeux-btn" href="jeux.html">🎮 Jeux</a>
   </div>
 
 </div>
@@ -301,8 +323,8 @@
   // ============================================================
   // CONFIGURATION — remplace ces deux valeurs par les tiennes
   // ============================================================
-  const GITHUB_USER = "mediapan";
-  const GITHUB_REPO = "petit-sudiste-tablette";
+  const GITHUB_USER = "TON_GITHUB_USERNAME";
+  const GITHUB_REPO = "TON_REPO_NAME";
   // ============================================================
 
   const DATA_URL = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/main/data.json`;
