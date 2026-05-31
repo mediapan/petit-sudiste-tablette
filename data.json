@@ -1,8 +1,8 @@
 {
   "nom": "Petit Sudiste 13",
   "annonce": {
-    "tag": "Bienvenue",
-    "texte": "Bienvenue dans l'appartement ! Tout est prêt pour votre séjour. Bonne détente 🌿"
+    "tag": "Important",
+    "texte": "Pensez à faire le ménage avant de quitter les lieux. Merci ;-)"
   },
   "wifi": {
     "ssid": "PetitSudiste_5G",
