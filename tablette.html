@@ -520,8 +520,9 @@
         // ALERTE URGENTE
         const overlay = document.getElementById('alerte-overlay');
         const messageActuel = d.alerte && d.alerte.message ? d.alerte.message : '';
-        const confirmeMsg = localStorage.getItem('alerte_confirmee_msg');
-        if (d.alerte && d.alerte.active && messageActuel && confirmeMsg !== messageActuel) {
+        const cookieConfirme = document.cookie.split(';').find(c => c.trim().startsWith('alerte_msg='));
+        const msgConfirme = cookieConfirme ? decodeURIComponent(cookieConfirme.split('=')[1].trim()) : '';
+        if (d.alerte && d.alerte.active && messageActuel && msgConfirme !== messageActuel) {
           document.getElementById('alerte-message').textContent = messageActuel;
           overlay.classList.add('active');
           const bar = document.getElementById('alerte-bar');
@@ -539,11 +540,13 @@
   // Rechargement toutes les 30 secondes
   setInterval(loadData, 30000);
 
-  // Confirmation alerte par le locataire (sans token)
+  // Confirmation alerte par le locataire
   function confirmerAlerte() {
     const msgActuel = document.getElementById('alerte-message').textContent;
     document.getElementById('alerte-overlay').classList.remove('active');
-    localStorage.setItem('alerte_confirmee_msg', msgActuel);
+    // Cookie valable 7 jours
+    const expire = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toUTCString();
+    document.cookie = `alerte_msg=${encodeURIComponent(msgActuel)}; expires=${expire}; path=/`;
   }
 </script>
 </body>
