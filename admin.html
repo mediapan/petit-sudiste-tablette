@@ -318,15 +318,73 @@
   .instructions strong { font-weight: 500; }
   .instructions a { color: #c9a96e; }
 
-  #config-warning {
+  /* ÉCRAN TOKEN */
+  #token-screen {
     display: none;
-    background: #fff0f0;
-    border: 1px solid #f0a0a0;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--bg);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .token-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 14px 16px;
+    padding: 28px 24px;
+    max-width: 400px;
+    width: 100%;
+  }
+
+  .token-title {
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .token-sub {
     font-size: 13px;
-    color: #a02020;
-    margin-bottom: 16px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .token-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    margin-bottom: 12px;
+    outline: none;
+    background: var(--bg);
+  }
+
+  .token-input:focus { border-color: var(--accent); }
+
+  .token-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .token-note {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 10px;
+    text-align: center;
   }
 </style>
 </head>
@@ -344,17 +402,20 @@
   </div>
 </div>
 
+<!-- ÉCRAN TOKEN -->
+<div id="token-screen">
+  <div class="token-box">
+    <div class="token-title">🔑 Connexion admin</div>
+    <div class="token-sub">Entre ton token GitHub pour accéder au panneau de gestion. Il sera sauvegardé sur cet appareil.</div>
+    <input class="token-input" id="token-input" type="password" placeholder="github_pat_...">
+    <button class="token-btn" onclick="sauvegarderToken()">Accéder →</button>
+    <div class="token-note">Le token n'est jamais envoyé à un serveur tiers</div>
+  </div>
+</div>
+
+<div id="main-content" style="display:none">
+
 <div class="content">
-
-  <div id="config-warning">
-    ⚠️ Configure d'abord ton token GitHub dans la section &lt;script&gt; de ce fichier.
-  </div>
-
-  <!-- INSTRUCTIONS -->
-  <div class="instructions">
-    📋 <strong>Comment ça marche :</strong> modifie ce que tu veux ci-dessous, puis appuie sur <strong>Publier</strong>. La tablette se mettra à jour dans les 30 secondes.<br><br>
-    ⚠️ <strong>Première utilisation :</strong> ouvre ce fichier avec un éditeur de texte et renseigne ton <code>GITHUB_TOKEN</code>, <code>GITHUB_USER</code> et <code>GITHUB_REPO</code> dans la section config en bas.
-  </div>
 
   <!-- MESSAGE -->
   <div class="section">
@@ -433,23 +494,55 @@
 
 </div>
 
+</div><!-- fin main-content -->
+
 <div class="toast" id="toast"></div>
 
 <script>
 // ============================================================
-// CONFIGURATION — à remplir une seule fois
+// CONFIGURATION — username et repo seulement (pas le token)
 // ============================================================
-const GITHUB_TOKEN = "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"; // github.com → Settings → Developer settings → Personal access tokens → Fine-grained → Contents: Read & Write
-const GITHUB_USER  = "mediapan";
-const GITHUB_REPO  = "petit-sudiste-tablette";
+const GITHUB_USER = "mediapan";
+const GITHUB_REPO = "petit-sudiste-tablette";
 // ============================================================
 
 const DATA_URL_RAW = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/main/data.json`;
 const API_URL      = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/data.json`;
 
-let currentData = null;
-let currentSha  = null;
-let selectedTag = 'Bienvenue';
+let GITHUB_TOKEN = '';
+let currentData  = null;
+let currentSha   = null;
+let selectedTag  = 'Bienvenue';
+
+// Gestion du token — stocké dans localStorage, jamais dans le code
+function init() {
+  const saved = localStorage.getItem('gh_token');
+  if (saved) {
+    GITHUB_TOKEN = saved;
+    afficherAdmin();
+  } else {
+    document.getElementById('token-screen').style.display = 'flex';
+  }
+}
+
+function sauvegarderToken() {
+  const t = document.getElementById('token-input').value.trim();
+  if (!t) return;
+  GITHUB_TOKEN = t;
+  localStorage.setItem('gh_token', t);
+  document.getElementById('token-screen').style.display = 'none';
+  afficherAdmin();
+}
+
+function afficherAdmin() {
+  document.getElementById('main-content').style.display = 'block';
+  chargerData();
+}
+
+function deconnexion() {
+  localStorage.removeItem('gh_token');
+  location.reload();
+}
 
 function showToast(msg, duration = 2800) {
   const t = document.getElementById('toast');
@@ -464,7 +557,6 @@ function selectTag(el, tag) {
   selectedTag = tag;
 }
 
-// Rendu des infos pratiques
 function renderInfos(infos) {
   const card = document.getElementById('infos-card');
   card.innerHTML = '';
@@ -476,7 +568,6 @@ function renderInfos(infos) {
   });
 }
 
-// Rendu des règles
 function renderRegles(regles) {
   const card = document.getElementById('regles-card');
   card.innerHTML = '';
@@ -499,38 +590,21 @@ function toggleRegle(btn, i) {
   btn.textContent = isOk ? '✗' : '✓';
 }
 
-// Chargement des données depuis GitHub
 function chargerData() {
-  if (GITHUB_TOKEN === "TON_PERSONAL_ACCESS_TOKEN") {
-    document.getElementById('config-warning').style.display = 'block';
-  }
-
   fetch(DATA_URL_RAW + '?t=' + Date.now())
     .then(r => r.json())
     .then(d => {
       currentData = d;
-
-      // Annonce
       document.getElementById('adm-texte').value = d.annonce.texte;
       selectedTag = d.annonce.tag;
       document.querySelectorAll('.tag-btn').forEach(b => {
         if (b.textContent === selectedTag) b.classList.add('active');
       });
-
-      // WiFi
-      document.getElementById('wifi-ssid').value = d.wifi.ssid;
-      document.getElementById('wifi-pass').value = d.wifi.password;
-
-      // Checkout
+      document.getElementById('wifi-ssid').value   = d.wifi.ssid;
+      document.getElementById('wifi-pass').value   = d.wifi.password;
       document.getElementById('adm-checkout').value = d.checkout;
-
-      // Infos
       renderInfos(d.infos);
-
-      // Règles
       renderRegles(d.regles);
-
-      // Sections
       document.getElementById('tog-meteo').checked  = d.sections.meteo;
       document.getElementById('tog-wifi').checked   = d.sections.wifi;
       document.getElementById('tog-regles').checked = d.sections.regles;
@@ -538,43 +612,33 @@ function chargerData() {
     })
     .catch(() => showToast('⚠️ Impossible de charger les données'));
 
-  // Récupère le SHA du fichier (nécessaire pour l'API GitHub)
-  if (GITHUB_TOKEN !== "TON_PERSONAL_ACCESS_TOKEN") {
-    fetch(API_URL, { headers: { Authorization: `token ${GITHUB_TOKEN}` } })
-      .then(r => r.json())
-      .then(d => { currentSha = d.sha; })
-      .catch(() => {});
-  }
+  fetch(API_URL, { headers: { Authorization: `token ${GITHUB_TOKEN}` } })
+    .then(r => r.json())
+    .then(d => {
+      if (d.sha) { currentSha = d.sha; }
+      else { showToast('⚠️ Token invalide — reconnecte-toi', 4000); deconnexion(); }
+    })
+    .catch(() => {});
 }
 
-// Construction du JSON mis à jour depuis le formulaire
 function buildData() {
   const infosInputs = document.querySelectorAll('[data-info]');
   const infos = Array.from(infosInputs).map((inp, i) => ({
     label: currentData.infos[i].label,
     valeur: inp.value
   }));
-
   const regleBtns = document.querySelectorAll('[data-regle]');
   const regleTxts = document.querySelectorAll('[data-regle-txt]');
   const regles = Array.from(regleBtns).map((btn, i) => ({
     ok: btn.classList.contains('ok'),
     texte: regleTxts[i].value
   }));
-
   return {
     ...currentData,
-    annonce: {
-      tag: selectedTag,
-      texte: document.getElementById('adm-texte').value
-    },
-    wifi: {
-      ssid: document.getElementById('wifi-ssid').value,
-      password: document.getElementById('wifi-pass').value
-    },
+    annonce: { tag: selectedTag, texte: document.getElementById('adm-texte').value },
+    wifi: { ssid: document.getElementById('wifi-ssid').value, password: document.getElementById('wifi-pass').value },
     checkout: document.getElementById('adm-checkout').value,
-    infos,
-    regles,
+    infos, regles,
     sections: {
       meteo:  document.getElementById('tog-meteo').checked,
       wifi:   document.getElementById('tog-wifi').checked,
@@ -584,44 +648,30 @@ function buildData() {
   };
 }
 
-// Publication vers GitHub
 async function publier() {
-  if (GITHUB_TOKEN === "TON_PERSONAL_ACCESS_TOKEN") {
-    showToast('⚠️ Configure ton token GitHub d\'abord !', 3500);
-    return;
-  }
-
   const btn = document.getElementById('publish-btn');
   btn.disabled = true;
   btn.textContent = 'Publication…';
 
   const newData = buildData();
   const content = btoa(unescape(encodeURIComponent(JSON.stringify(newData, null, 2))));
-
-  const body = {
-    message: 'Mise à jour tablette',
-    content,
-    ...(currentSha ? { sha: currentSha } : {})
-  };
+  const body = { message: 'Mise à jour tablette', content, ...(currentSha ? { sha: currentSha } : {}) };
 
   try {
     const res = await fetch(API_URL, {
       method: 'PUT',
-      headers: {
-        Authorization: `token ${GITHUB_TOKEN}`,
-        'Content-Type': 'application/json'
-      },
+      headers: { Authorization: `token ${GITHUB_TOKEN}`, 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     });
-
     if (res.ok) {
       const d = await res.json();
-      currentSha = d.content.sha;
+      currentSha  = d.content.sha;
       currentData = newData;
       showToast('✓ Publié ! Tablette mise à jour dans 30 sec');
     } else {
       const err = await res.json();
-      showToast('❌ Erreur : ' + (err.message || res.status), 4000);
+      if (res.status === 401) { showToast('⚠️ Token expiré — reconnecte-toi', 4000); deconnexion(); }
+      else showToast('❌ Erreur : ' + (err.message || res.status), 4000);
     }
   } catch (e) {
     showToast('❌ Erreur réseau', 3000);
@@ -631,7 +681,16 @@ async function publier() {
   btn.textContent = '✦ Publier sur la tablette';
 }
 
-chargerData();
+// Permettre de valider avec Entrée
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('token-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') sauvegarderToken();
+  });
+});
+
+init();
 </script>
+
+
 </body>
 </html>
