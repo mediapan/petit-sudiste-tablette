@@ -500,6 +500,7 @@
       </div>
       <label class="form-label">Message urgent</label>
       <textarea class="form-textarea" id="adm-alerte" placeholder="Ex: Coupure d'eau ce soir de 18h à 22h. Merci de votre compréhension." style="min-height:70px;"></textarea>
+      <div id="alerte-lu" style="display:none; margin-top:8px; font-size:13px; color:#27ae60; background:rgba(39,174,96,0.1); border:1px solid rgba(39,174,96,0.3); border-radius:8px; padding:8px 12px;"></div>
     </div>
   </div>
 
@@ -631,6 +632,13 @@ function chargerData() {
         document.getElementById('tog-alerte').checked = d.alerte.active;
         document.getElementById('adm-alerte').value   = d.alerte.message || '';
         toggleAlerteStyle();
+        const luEl = document.getElementById('alerte-lu');
+        if (d.alerte.lu_le) {
+          luEl.textContent = '✅ Lu le ' + d.alerte.lu_le;
+          luEl.style.display = 'block';
+        } else {
+          luEl.style.display = 'none';
+        }
       }
     })
     .catch(() => showToast('⚠️ Impossible de charger les données'));
