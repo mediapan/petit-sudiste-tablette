@@ -487,6 +487,22 @@
     </div>
   </div>
 
+  <!-- ALERTE URGENTE -->
+  <div class="section">
+    <div class="section-title">🚨 Alerte urgente</div>
+    <div class="card" id="alerte-card" style="border-color: rgba(235,87,87,0.3);">
+      <div class="toggle-row" style="margin-bottom:10px;">
+        <div class="toggle-info">
+          <div class="tl">Activer l'alerte</div>
+          <div class="ts">Affiche un écran rouge sur la tablette</div>
+        </div>
+        <label class="toggle"><input type="checkbox" id="tog-alerte" onchange="toggleAlerteStyle()"><span class="tslider"></span></label>
+      </div>
+      <label class="form-label">Message urgent</label>
+      <textarea class="form-textarea" id="adm-alerte" placeholder="Ex: Coupure d'eau ce soir de 18h à 22h. Merci de votre compréhension." style="min-height:70px;"></textarea>
+    </div>
+  </div>
+
   <!-- PUBLIER -->
   <div class="publish-section">
     <button class="publish-btn" id="publish-btn" onclick="publier()">✦ Publier sur la tablette</button>
@@ -609,6 +625,13 @@ function chargerData() {
       document.getElementById('tog-wifi').checked   = d.sections.wifi;
       document.getElementById('tog-regles').checked = d.sections.regles;
       document.getElementById('tog-infos').checked  = d.sections.infos;
+
+      // Alerte
+      if (d.alerte) {
+        document.getElementById('tog-alerte').checked = d.alerte.active;
+        document.getElementById('adm-alerte').value   = d.alerte.message || '';
+        toggleAlerteStyle();
+      }
     })
     .catch(() => showToast('⚠️ Impossible de charger les données'));
 
@@ -644,8 +667,19 @@ function buildData() {
       wifi:   document.getElementById('tog-wifi').checked,
       regles: document.getElementById('tog-regles').checked,
       infos:  document.getElementById('tog-infos').checked
+    },
+    alerte: {
+      active:  document.getElementById('tog-alerte').checked,
+      message: document.getElementById('adm-alerte').value
     }
   };
+}
+
+function toggleAlerteStyle() {
+  const card = document.getElementById('alerte-card');
+  const active = document.getElementById('tog-alerte').checked;
+  card.style.background = active ? 'rgba(235,87,87,0.08)' : '';
+  card.style.borderColor = active ? 'rgba(235,87,87,0.6)' : 'rgba(235,87,87,0.3)';
 }
 
 async function publier() {

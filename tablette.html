@@ -245,6 +245,71 @@
   /* HIDDEN */
   .hidden { display: none !important; }
 
+  /* ALERTE URGENTE */
+  .alerte-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #c0392b;
+    z-index: 50;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    animation: pulse-bg 2s ease-in-out infinite;
+  }
+
+  .alerte-overlay.active { display: flex; }
+
+  @keyframes pulse-bg {
+    0%, 100% { background: #c0392b; }
+    50%       { background: #e74c3c; }
+  }
+
+  .alerte-icon {
+    font-size: 80px;
+    margin-bottom: 24px;
+    animation: bounce 1s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-10px); }
+  }
+
+  .alerte-titre {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 500;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+  }
+
+  .alerte-message {
+    font-size: 32px;
+    font-weight: 500;
+    color: white;
+    text-align: center;
+    line-height: 1.5;
+    max-width: 800px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+
+  .alerte-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 6px;
+    background: rgba(255,255,255,0.4);
+    animation: progress 30s linear forwards;
+  }
+
+  @keyframes progress {
+    from { width: 100%; }
+    to   { width: 0%; }
+  }
+
   /* BOUTON JEUX */
   .jeux-btn {
     display: inline-flex;
@@ -268,6 +333,14 @@
 </style>
 </head>
 <body>
+<!-- ALERTE URGENTE -->
+<div class="alerte-overlay" id="alerte-overlay">
+  <div class="alerte-icon">🚨</div>
+  <div class="alerte-titre">Message urgent</div>
+  <div class="alerte-message" id="alerte-message"></div>
+  <div class="alerte-bar" id="alerte-bar"></div>
+</div>
+
 <div id="app">
 
   <div class="top-bar">
@@ -422,6 +495,20 @@
             div.innerHTML = `<span class="info-dot"></span>${i.label} : <span class="val">${i.valeur}</span>`;
             row.appendChild(div);
           });
+        }
+
+        // ALERTE URGENTE
+        const overlay = document.getElementById('alerte-overlay');
+        if (d.alerte && d.alerte.active && d.alerte.message) {
+          document.getElementById('alerte-message').textContent = d.alerte.message;
+          overlay.classList.add('active');
+          // Reset animation barre
+          const bar = document.getElementById('alerte-bar');
+          bar.style.animation = 'none';
+          bar.offsetHeight; // reflow
+          bar.style.animation = 'progress 30s linear forwards';
+        } else {
+          overlay.classList.remove('active');
         }
       })
       .catch(() => console.log('Erreur chargement data'));
