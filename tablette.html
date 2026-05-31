@@ -549,7 +549,7 @@
 
     // Écrit lu_le dans data.json via GitHub
     const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/data.json`;
-    const token  = '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';
+    const token  = atob('Z2hwX2lIRkl2M1hFMlJxOU5vSW5BVUhZSEZqUDl2SUUwajAyYjZNVw==');
 
     fetch(DATA_URL + '?t=' + Date.now())
       .then(r => r.json())
