@@ -29,19 +29,19 @@
   ],
   "regles": [
     {
-      "ok": true,
+      "ok": false,
       "texte": "Animaux acceptés (extérieur)"
     },
     {
-      "ok": true,
+      "ok": false,
       "texte": "Fumeur autorisé en terrasse"
     },
     {
-      "ok": true,
+      "ok": false,
       "texte": "Pas de fêtes / musique après 22h"
     },
     {
-      "ok": true,
+      "ok": false,
       "texte": "Pas de chaussures dans l'appartement"
     }
   ],
