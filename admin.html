@@ -325,7 +325,6 @@
     top: 0; left: 0; right: 0; bottom: 0;
     background: var(--bg);
     z-index: 100;
-    display: flex;
     align-items: center;
     justify-content: center;
     padding: 24px;
@@ -536,6 +535,7 @@ function init() {
   const saved = localStorage.getItem('gh_token');
   if (saved) {
     GITHUB_TOKEN = saved;
+    document.getElementById('token-screen').style.display = 'none';
     afficherAdmin();
   } else {
     document.getElementById('token-screen').style.display = 'flex';
