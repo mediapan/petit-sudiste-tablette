@@ -486,6 +486,15 @@
     </div>
   </div>
 
+  <!-- MÉNAGE -->
+  <div class="section">
+    <div class="section-title">🧹 Checklist ménage départ</div>
+    <div class="card" id="menage-card">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:12px;">Modifie les tâches — une par ligne par catégorie</div>
+      <div id="menage-sections"></div>
+    </div>
+  </div>
+
   <!-- ALERTE URGENTE -->
   <div class="section">
     <div class="section-title">🚨 Alerte urgente</div>
@@ -640,6 +649,24 @@ function chargerData() {
           luEl.style.display = 'none';
         }
       }
+
+      // Ménage
+      if (d.menage) {
+        const container = document.getElementById('menage-sections');
+        container.innerHTML = '';
+        d.menage.forEach((section, si) => {
+          const div = document.createElement('div');
+          div.style.marginBottom = '14px';
+          div.innerHTML = `
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:6px;">${section.cat}</div>
+            ${section.items.map((item, ii) => `
+              <div style="display:flex;gap:8px;margin-bottom:5px;">
+                <input style="flex:1;border:1px solid var(--border);border-radius:6px;padding:7px 10px;font-size:12px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);" 
+                  value="${item}" data-menage="${si}-${ii}">
+              </div>`).join('')}`;
+          container.appendChild(div);
+        });
+      }
     })
     .catch(() => showToast('⚠️ Impossible de charger les données'));
 
@@ -679,7 +706,14 @@ function buildData() {
     alerte: {
       active:  document.getElementById('tog-alerte').checked,
       message: document.getElementById('adm-alerte').value
-    }
+    },
+    menage: currentData.menage ? currentData.menage.map((section, si) => ({
+      cat: section.cat,
+      items: section.items.map((_, ii) => {
+        const inp = document.querySelector(`[data-menage="${si}-${ii}"]`);
+        return inp ? inp.value : _;
+      })
+    })) : currentData.menage
   };
 }
 

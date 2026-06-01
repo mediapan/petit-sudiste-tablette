@@ -411,6 +411,7 @@
     <div class="checkout-text">Check-out : <strong id="checkout-text">---</strong></div>
     <div class="infos-row" id="infos-row"></div>
     <a class="jeux-btn" href="sorties.html">🗺️ Sorties</a>
+    <a class="jeux-btn" href="menage.html">🧹 Ménage</a>
     <a class="jeux-btn" href="jeux.html">🎮 Jeux</a>
     <a class="jeux-btn" href="https://youtu.be/SBsF5gwutT0" target="_blank">🎬 Présentation</a>
   </div>
@@ -511,7 +512,7 @@
           ul.innerHTML = '';
           d.regles.forEach(r => {
             const li = document.createElement('li');
-            li.innerHTML = `<span class="rule-dot ${r.ok ? 'rule-ok' : 'rule-no'}">${r.ok ? '✓' : '✗'}</span> ${r.texte}`;
+            li.innerHTML = r.texte;
             ul.appendChild(li);
           });
         } else {

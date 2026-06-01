@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ménage départ — Petit Sudiste 13</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap');
+
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --accent: #c9a96e;
+    --accent2: #7eb8c9;
+    --text: #f0ede8;
+    --muted: #8b8fa8;
+    --border: rgba(255,255,255,0.08);
+    --green: #6fcf97;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+
+  .header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 28px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 10;
+  }
+
+  .header-title { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--accent); }
+
+  .back-btn {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 13px; color: var(--muted);
+    background: none; border: 1px solid var(--border);
+    border-radius: 20px; padding: 7px 16px;
+    font-family: 'DM Sans', sans-serif; cursor: pointer;
+    text-decoration: none; transition: 0.15s;
+  }
+
+  .progress-bar-wrap {
+    background: var(--surface);
+    padding: 14px 28px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .progress-label {
+    display: flex; justify-content: space-between;
+    font-size: 12px; color: var(--muted); margin-bottom: 8px;
+  }
+
+  .progress-label span { color: var(--accent); font-weight: 500; }
+
+  .progress-bar {
+    height: 6px; background: rgba(255,255,255,0.08);
+    border-radius: 6px; overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--green));
+    border-radius: 6px;
+    transition: width 0.4s ease;
+  }
+
+  .content { padding: 20px 28px; max-width: 700px; margin: 0 auto; }
+
+  .section-title {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--muted); margin-bottom: 12px; margin-top: 24px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-title::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
+  .section-title:first-child { margin-top: 0; }
+
+  .check-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
+
+  .check-item {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    user-select: none;
+  }
+
+  .check-item.done {
+    border-color: rgba(111,207,151,0.3);
+    background: rgba(111,207,151,0.05);
+  }
+
+  .check-box {
+    width: 24px; height: 24px; border-radius: 50%;
+    border: 2px solid var(--muted);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: 0.15s;
+    font-size: 13px;
+  }
+
+  .check-item.done .check-box {
+    background: var(--green); border-color: var(--green); color: white;
+  }
+
+  .check-text {
+    font-size: 14px; color: var(--muted); line-height: 1.4;
+    transition: 0.15s;
+  }
+
+  .check-item.done .check-text {
+    color: var(--text); text-decoration: line-through;
+    text-decoration-color: rgba(111,207,151,0.5);
+  }
+
+  /* SUCCÈS */
+  .success-banner {
+    display: none;
+    background: rgba(111,207,151,0.1);
+    border: 1px solid rgba(111,207,151,0.3);
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .success-banner.show { display: block; }
+  .success-icon { font-size: 48px; margin-bottom: 10px; }
+  .success-title { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--green); margin-bottom: 6px; }
+  .success-sub { font-size: 13px; color: var(--muted); }
+
+  .reset-btn {
+    margin-top: 16px;
+    padding: 10px 24px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-title">🧹 Ménage départ</div>
+  <a class="back-btn" href="tablette.html">← Retour</a>
+</div>
+
+<div class="progress-bar-wrap">
+  <div class="progress-label">
+    Progression <span id="progress-text">0 / 0</span>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+  </div>
+</div>
+
+<div class="content">
+  <div id="checklist-content"></div>
+  <div class="success-banner" id="success-banner">
+    <div class="success-icon">✅</div>
+    <div class="success-title">Merci !</div>
+    <div class="success-sub">Tout est en ordre. Bon retour et à bientôt !</div>
+    <button class="reset-btn" onclick="resetAll()">Recommencer</button>
+  </div>
+</div>
+
+<script>
+const GITHUB_USER = 'mediapan';
+const GITHUB_REPO = 'petit-sudiste-tablette';
+const DATA_URL = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/main/data.json`;
+
+let taches = [];
+let etat = {};
+
+const defaultTaches = [
+  { cat: "🗑️ Poubelles", items: [
+    "Vider toutes les poubelles de la maison",
+    "Sortir les poubelles et les déposer au point de collecte",
+    "Remettre les poubelles vides à leur place"
+  ]},
+  { cat: "🍽️ Cuisine", items: [
+    "Laver et ranger la vaisselle",
+    "Nettoyer le plan de travail et l'évier",
+    "Nettoyer le four / micro-ondes si utilisé",
+    "Vider et nettoyer le réfrigérateur",
+    "Balayer et nettoyer le sol"
+  ]},
+  { cat: "🛏️ Chambres", items: [
+    "Retirer les draps et les taies d'oreiller",
+    "Plier les draps et les déposer dans le panier prévu",
+    "Aérer les matelas (laisser fenêtre ouverte)"
+  ]},
+  { cat: "🚿 Salle de bain", items: [
+    "Nettoyer la douche / baignoire",
+    "Nettoyer le lavabo et les robinets",
+    "Vider la poubelle de salle de bain",
+    "Essuyer le miroir"
+  ]},
+  { cat: "🏠 Général", items: [
+    "Fermer toutes les fenêtres",
+    "Éteindre toutes les lumières",
+    "Vérifier que la climatisation / chauffage est éteint",
+    "Déposer les clés sur la table",
+    "Faire un dernier tour pour vérifier que rien n'est oublié"
+  ]}
+];
+
+function charger() {
+  fetch(DATA_URL + '?t=' + Date.now())
+    .then(r => r.json())
+    .then(d => {
+      taches = d.menage && d.menage.length ? d.menage : defaultTaches;
+      afficher();
+    })
+    .catch(() => {
+      taches = defaultTaches;
+      afficher();
+    });
+}
+
+function afficher() {
+  const container = document.getElementById('checklist-content');
+  container.innerHTML = '';
+  let total = 0;
+
+  taches.forEach((section, si) => {
+    const titre = document.createElement('div');
+    titre.className = 'section-title';
+    titre.textContent = section.cat;
+    container.appendChild(titre);
+
+    const ul = document.createElement('div');
+    ul.className = 'check-list';
+
+    section.items.forEach((item, ii) => {
+      const key = `${si}-${ii}`;
+      total++;
+      const div = document.createElement('div');
+      div.className = 'check-item' + (etat[key] ? ' done' : '');
+      div.innerHTML = `
+        <div class="check-box">${etat[key] ? '✓' : ''}</div>
+        <div class="check-text">${item}</div>`;
+      div.onclick = () => toggle(key, div);
+      ul.appendChild(div);
+    });
+
+    container.appendChild(ul);
+  });
+
+  updateProgress(total);
+}
+
+function toggle(key, el) {
+  etat[key] = !etat[key];
+  el.classList.toggle('done', etat[key]);
+  el.querySelector('.check-box').textContent = etat[key] ? '✓' : '';
+  updateProgress();
+}
+
+function updateProgress(total) {
+  const tous = document.querySelectorAll('.check-item');
+  const faits = document.querySelectorAll('.check-item.done');
+  const t = total || tous.length;
+  const f = faits.length;
+  document.getElementById('progress-text').textContent = `${f} / ${t}`;
+  document.getElementById('progress-fill').style.width = t ? (f/t*100) + '%' : '0%';
+  if (f > 0 && f === t) {
+    document.getElementById('success-banner').classList.add('show');
+  } else {
+    document.getElementById('success-banner').classList.remove('show');
+  }
+}
+
+function resetAll() {
+  etat = {};
+  afficher();
+}
+
+charger();
+</script>
+</body>
+</html>
