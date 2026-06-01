@@ -5,169 +5,233 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ménage départ — Petit Sudiste 13</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap');
 
   :root {
-    --bg: #0f1117;
-    --surface: #1a1d27;
-    --accent: #c9a96e;
-    --accent2: #7eb8c9;
+    --bg: #0d2818;
+    --surface: #122e1c;
+    --surface2: #1a3d26;
     --text: #f0ede8;
-    --muted: #8b8fa8;
+    --muted: #8faa96;
     --border: rgba(255,255,255,0.08);
+    --c1: #f4a261; /* orange */
+    --c2: #2ec4b6; /* turquoise */
+    --c3: #e9c46a; /* jaune */
+    --c4: #e76f51; /* corail */
+    --c5: #90d4a3; /* vert clair */
     --green: #6fcf97;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
 
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
   .header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 28px;
     background: var(--surface);
     border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between;
     position: sticky; top: 0; z-index: 10;
   }
 
-  .header-title { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--accent); }
+  .header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; color: var(--c5);
+    display: flex; align-items: center; gap: 10px;
+  }
 
   .back-btn {
-    display: flex; align-items: center; gap: 6px;
     font-size: 13px; color: var(--muted);
     background: none; border: 1px solid var(--border);
     border-radius: 20px; padding: 7px 16px;
     font-family: 'DM Sans', sans-serif; cursor: pointer;
-    text-decoration: none; transition: 0.15s;
+    text-decoration: none;
   }
 
-  .progress-bar-wrap {
+  /* PROGRESS */
+  .progress-wrap {
     background: var(--surface);
-    padding: 14px 28px;
+    padding: 12px 24px 14px;
     border-bottom: 1px solid var(--border);
   }
 
-  .progress-label {
+  .progress-top {
     display: flex; justify-content: space-between;
     font-size: 12px; color: var(--muted); margin-bottom: 8px;
   }
 
-  .progress-label span { color: var(--accent); font-weight: 500; }
+  .progress-top strong { color: var(--c5); }
 
   .progress-bar {
-    height: 6px; background: rgba(255,255,255,0.08);
-    border-radius: 6px; overflow: hidden;
+    height: 8px; background: rgba(255,255,255,0.07);
+    border-radius: 8px; overflow: hidden;
   }
 
   .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--accent), var(--green));
-    border-radius: 6px;
+    background: linear-gradient(90deg, var(--c2), var(--c5));
+    border-radius: 8px;
     transition: width 0.4s ease;
   }
 
-  .content { padding: 20px 28px; max-width: 700px; margin: 0 auto; }
+  /* GRILLE CATÉGORIES */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    padding: 20px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
 
-  .section-title {
-    font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em;
-    color: var(--muted); margin-bottom: 12px; margin-top: 24px;
+  .cat-card {
+    background: var(--surface);
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .cat-header {
+    padding: 14px 18px 12px;
     display: flex; align-items: center; gap: 10px;
   }
-  .section-title::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
-  .section-title:first-child { margin-top: 0; }
 
-  .check-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
+  .cat-icon { font-size: 24px; }
+
+  .cat-title {
+    font-size: 15px; font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  .cat-count {
+    margin-left: auto;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.08);
+    color: var(--muted);
+  }
+
+  /* couleurs par catégorie */
+  .cat-0 .cat-header { background: linear-gradient(135deg, rgba(244,162,97,0.15), rgba(244,162,97,0.05)); border-bottom: 2px solid var(--c1); }
+  .cat-0 .cat-title  { color: var(--c1); }
+  .cat-1 .cat-header { background: linear-gradient(135deg, rgba(46,196,182,0.15), rgba(46,196,182,0.05)); border-bottom: 2px solid var(--c2); }
+  .cat-1 .cat-title  { color: var(--c2); }
+  .cat-2 .cat-header { background: linear-gradient(135deg, rgba(233,196,106,0.15), rgba(233,196,106,0.05)); border-bottom: 2px solid var(--c3); }
+  .cat-2 .cat-title  { color: var(--c3); }
+  .cat-3 .cat-header { background: linear-gradient(135deg, rgba(231,111,81,0.15), rgba(231,111,81,0.05)); border-bottom: 2px solid var(--c4); }
+  .cat-3 .cat-title  { color: var(--c4); }
+  .cat-4 .cat-header { background: linear-gradient(135deg, rgba(144,212,163,0.15), rgba(144,212,163,0.05)); border-bottom: 2px solid var(--c5); }
+  .cat-4 .cat-title  { color: var(--c5); }
+
+  /* ITEMS */
+  .cat-items { padding: 10px 12px; }
 
   .check-item {
-    display: flex; align-items: center; gap: 14px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 14px 16px;
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 8px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: border-color 0.15s, background 0.15s;
-    user-select: none;
+    transition: background 0.15s;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
   }
 
-  .check-item.done {
-    border-color: rgba(111,207,151,0.3);
-    background: rgba(111,207,151,0.05);
-  }
+  .check-item:last-child { border-bottom: none; }
+  .check-item:hover { background: rgba(255,255,255,0.04); }
 
   .check-box {
-    width: 24px; height: 24px; border-radius: 50%;
-    border: 2px solid var(--muted);
+    width: 26px; height: 26px; border-radius: 8px;
+    border: 2px solid rgba(255,255,255,0.2);
     display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; transition: 0.15s;
-    font-size: 13px;
+    flex-shrink: 0; font-size: 14px; transition: 0.2s;
   }
 
-  .check-item.done .check-box {
-    background: var(--green); border-color: var(--green); color: white;
-  }
+  .cat-0 .check-item.done .check-box { background: var(--c1); border-color: var(--c1); }
+  .cat-1 .check-item.done .check-box { background: var(--c2); border-color: var(--c2); }
+  .cat-2 .check-item.done .check-box { background: var(--c3); border-color: var(--c3); }
+  .cat-3 .check-item.done .check-box { background: var(--c4); border-color: var(--c4); }
+  .cat-4 .check-item.done .check-box { background: var(--c5); border-color: var(--c5); }
 
   .check-text {
-    font-size: 14px; color: var(--muted); line-height: 1.4;
-    transition: 0.15s;
+    font-size: 13px; color: var(--muted); line-height: 1.4;
+    transition: 0.2s;
   }
 
   .check-item.done .check-text {
-    color: var(--text); text-decoration: line-through;
-    text-decoration-color: rgba(111,207,151,0.5);
+    color: rgba(240,237,232,0.4);
+    text-decoration: line-through;
   }
 
   /* SUCCÈS */
-  .success-banner {
+  .success {
     display: none;
-    background: rgba(111,207,151,0.1);
-    border: 1px solid rgba(111,207,151,0.3);
-    border-radius: 14px;
-    padding: 20px;
+    margin: 0 24px 24px;
+    background: linear-gradient(135deg, rgba(46,196,182,0.15), rgba(144,212,163,0.1));
+    border: 1px solid rgba(144,212,163,0.3);
+    border-radius: 18px;
+    padding: 28px;
     text-align: center;
-    margin-top: 20px;
   }
 
-  .success-banner.show { display: block; }
-  .success-icon { font-size: 48px; margin-bottom: 10px; }
-  .success-title { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--green); margin-bottom: 6px; }
-  .success-sub { font-size: 13px; color: var(--muted); }
+  .success.show { display: block; }
+  .success-icon { font-size: 56px; margin-bottom: 12px; }
+  .success-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; color: var(--c5); margin-bottom: 8px;
+  }
+  .success-sub { font-size: 14px; color: var(--muted); line-height: 1.6; }
 
   .reset-btn {
-    margin-top: 16px;
-    padding: 10px 24px;
+    margin-top: 18px;
+    padding: 10px 28px;
     background: transparent;
     border: 1px solid var(--border);
     border-radius: 20px;
     color: var(--muted);
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    cursor: pointer;
+    font-size: 13px; cursor: pointer;
   }
+
+  /* FEUILLES DÉCO */
+  .leaf {
+    position: fixed; opacity: 0.06; font-size: 120px;
+    pointer-events: none; z-index: 0;
+  }
+  .leaf-1 { top: -20px; right: -20px; transform: rotate(30deg); }
+  .leaf-2 { bottom: 40px; left: -30px; transform: rotate(-20deg); }
 </style>
 </head>
 <body>
+
+<div class="leaf leaf-1">🌿</div>
+<div class="leaf leaf-2">🌴</div>
 
 <div class="header">
   <div class="header-title">🧹 Ménage départ</div>
   <a class="back-btn" href="tablette.html">← Retour</a>
 </div>
 
-<div class="progress-bar-wrap">
-  <div class="progress-label">
-    Progression <span id="progress-text">0 / 0</span>
+<div class="progress-wrap">
+  <div class="progress-top">
+    Tâches effectuées <strong id="prog-text">0 / 0</strong>
   </div>
   <div class="progress-bar">
-    <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+    <div class="progress-fill" id="prog-fill" style="width:0%"></div>
   </div>
 </div>
 
-<div class="content">
-  <div id="checklist-content"></div>
-  <div class="success-banner" id="success-banner">
-    <div class="success-icon">✅</div>
-    <div class="success-title">Merci !</div>
-    <div class="success-sub">Tout est en ordre. Bon retour et à bientôt !</div>
-    <button class="reset-btn" onclick="resetAll()">Recommencer</button>
-  </div>
+<div class="grid" id="grid"></div>
+<div class="success" id="success">
+  <div class="success-icon">🌺</div>
+  <div class="success-title">Merci beaucoup !</div>
+  <div class="success-sub">Tout est en ordre. Bon retour chez vous<br>et à très bientôt au Petit Sudiste 13 !</div>
+  <button class="reset-btn" onclick="reset()">↺ Recommencer</button>
 </div>
 
 <script>
@@ -175,112 +239,73 @@ const GITHUB_USER = 'mediapan';
 const GITHUB_REPO = 'petit-sudiste-tablette';
 const DATA_URL = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/main/data.json`;
 
+const defaultTaches = [
+  { cat: "Poubelles", emoji: "🗑️", items: ["Vider toutes les poubelles de la maison", "Sortir les poubelles au point de collecte", "Remettre les poubelles vides à leur place"] },
+  { cat: "Cuisine", emoji: "🍽️", items: ["Laver et ranger la vaisselle", "Nettoyer le plan de travail et l'évier", "Nettoyer le four / micro-ondes si utilisé", "Vider et nettoyer le réfrigérateur", "Balayer et nettoyer le sol"] },
+  { cat: "Chambres", emoji: "🛏️", items: ["Retirer les draps et taies d'oreiller", "Plier les draps et les déposer dans le panier", "Aérer les matelas"] },
+  { cat: "Salle de bain", emoji: "🚿", items: ["Nettoyer la douche / baignoire", "Nettoyer le lavabo et les robinets", "Vider la poubelle de salle de bain", "Essuyer le miroir"] },
+  { cat: "Général", emoji: "🏠", items: ["Fermer toutes les fenêtres", "Éteindre toutes les lumières", "Vérifier que la clim / chauffage est éteint", "Déposer les clés sur la table", "Dernier tour — vérifier qu'on n'a rien oublié"] }
+];
+
 let taches = [];
 let etat = {};
-
-const defaultTaches = [
-  { cat: "🗑️ Poubelles", items: [
-    "Vider toutes les poubelles de la maison",
-    "Sortir les poubelles et les déposer au point de collecte",
-    "Remettre les poubelles vides à leur place"
-  ]},
-  { cat: "🍽️ Cuisine", items: [
-    "Laver et ranger la vaisselle",
-    "Nettoyer le plan de travail et l'évier",
-    "Nettoyer le four / micro-ondes si utilisé",
-    "Vider et nettoyer le réfrigérateur",
-    "Balayer et nettoyer le sol"
-  ]},
-  { cat: "🛏️ Chambres", items: [
-    "Retirer les draps et les taies d'oreiller",
-    "Plier les draps et les déposer dans le panier prévu",
-    "Aérer les matelas (laisser fenêtre ouverte)"
-  ]},
-  { cat: "🚿 Salle de bain", items: [
-    "Nettoyer la douche / baignoire",
-    "Nettoyer le lavabo et les robinets",
-    "Vider la poubelle de salle de bain",
-    "Essuyer le miroir"
-  ]},
-  { cat: "🏠 Général", items: [
-    "Fermer toutes les fenêtres",
-    "Éteindre toutes les lumières",
-    "Vérifier que la climatisation / chauffage est éteint",
-    "Déposer les clés sur la table",
-    "Faire un dernier tour pour vérifier que rien n'est oublié"
-  ]}
-];
 
 function charger() {
   fetch(DATA_URL + '?t=' + Date.now())
     .then(r => r.json())
-    .then(d => {
-      taches = d.menage && d.menage.length ? d.menage : defaultTaches;
-      afficher();
-    })
-    .catch(() => {
-      taches = defaultTaches;
-      afficher();
-    });
+    .then(d => { taches = d.menage && d.menage.length ? d.menage : defaultTaches; afficher(); })
+    .catch(() => { taches = defaultTaches; afficher(); });
 }
 
 function afficher() {
-  const container = document.getElementById('checklist-content');
-  container.innerHTML = '';
-  let total = 0;
-
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
   taches.forEach((section, si) => {
-    const titre = document.createElement('div');
-    titre.className = 'section-title';
-    titre.textContent = section.cat;
-    container.appendChild(titre);
-
-    const ul = document.createElement('div');
-    ul.className = 'check-list';
-
-    section.items.forEach((item, ii) => {
-      const key = `${si}-${ii}`;
-      total++;
-      const div = document.createElement('div');
-      div.className = 'check-item' + (etat[key] ? ' done' : '');
-      div.innerHTML = `
-        <div class="check-box">${etat[key] ? '✓' : ''}</div>
-        <div class="check-text">${item}</div>`;
-      div.onclick = () => toggle(key, div);
-      ul.appendChild(div);
-    });
-
-    container.appendChild(ul);
+    const card = document.createElement('div');
+    card.className = `cat-card cat-${si % 5}`;
+    card.innerHTML = `
+      <div class="cat-header">
+        <span class="cat-icon">${section.emoji || '📋'}</span>
+        <span class="cat-title">${section.cat}</span>
+        <span class="cat-count" id="count-${si}">0 / ${section.items.length}</span>
+      </div>
+      <div class="cat-items">
+        ${section.items.map((item, ii) => `
+          <div class="check-item${etat[si+'-'+ii] ? ' done' : ''}" onclick="toggle(${si},${ii},this)">
+            <div class="check-box">${etat[si+'-'+ii] ? '✓' : ''}</div>
+            <div class="check-text">${item}</div>
+          </div>`).join('')}
+      </div>`;
+    grid.appendChild(card);
+    updateCount(si);
   });
-
-  updateProgress(total);
-}
-
-function toggle(key, el) {
-  etat[key] = !etat[key];
-  el.classList.toggle('done', etat[key]);
-  el.querySelector('.check-box').textContent = etat[key] ? '✓' : '';
   updateProgress();
 }
 
-function updateProgress(total) {
-  const tous = document.querySelectorAll('.check-item');
-  const faits = document.querySelectorAll('.check-item.done');
-  const t = total || tous.length;
-  const f = faits.length;
-  document.getElementById('progress-text').textContent = `${f} / ${t}`;
-  document.getElementById('progress-fill').style.width = t ? (f/t*100) + '%' : '0%';
-  if (f > 0 && f === t) {
-    document.getElementById('success-banner').classList.add('show');
-  } else {
-    document.getElementById('success-banner').classList.remove('show');
-  }
+function toggle(si, ii, el) {
+  const key = si+'-'+ii;
+  etat[key] = !etat[key];
+  el.classList.toggle('done', etat[key]);
+  el.querySelector('.check-box').textContent = etat[key] ? '✓' : '';
+  updateCount(si);
+  updateProgress();
 }
 
-function resetAll() {
-  etat = {};
-  afficher();
+function updateCount(si) {
+  const total = taches[si].items.length;
+  const done  = taches[si].items.filter((_, ii) => etat[si+'-'+ii]).length;
+  document.getElementById(`count-${si}`).textContent = `${done} / ${total}`;
 }
+
+function updateProgress() {
+  let total = 0, done = 0;
+  taches.forEach((s, si) => s.items.forEach((_, ii) => { total++; if (etat[si+'-'+ii]) done++; }));
+  document.getElementById('prog-text').textContent = `${done} / ${total}`;
+  document.getElementById('prog-fill').style.width = total ? (done/total*100)+'%' : '0%';
+  document.getElementById('success').classList.toggle('show', done > 0 && done === total);
+}
+
+function reset() { etat = {}; afficher(); }
 
 charger();
 </script>

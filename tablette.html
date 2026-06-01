@@ -10,21 +10,24 @@
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap');
 
   :root {
-    --bg: #0d2818;
-    --surface: #122e1c;
-    --surface2: #1a3d26;
-    --accent: #f4a261;
-    --accent2: #2ec4b6;
-    --text: #f0ede8;
-    --muted: #8faa96;
-    --border: rgba(255,255,255,0.08);
-    --green: #90d4a3;
-    --red: #e76f51;
+    --bg: #062010;
+    --surface: #0a2e18;
+    --surface2: #0f3d20;
+    --accent: #ff8c3a;
+    --accent2: #00d4c8;
+    --text: #f5f0e8;
+    --muted: #7dbf8e;
+    --border: rgba(255,255,255,0.12);
+    --green: #4ddb80;
+    --red: #ff5533;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   html, body { width: 100%; height: 100%; background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; overflow: hidden; }
+
+  /* Fond dégradé tropical */
+  body { background: radial-gradient(ellipse at top left, #0a3520 0%, #062010 50%, #031508 100%); }
 
   #app { display: grid; grid-template-rows: auto auto auto 1fr auto; height: 100vh; width: 100vw; }
 
@@ -32,7 +35,8 @@
   .top-bar {
     display: grid; grid-template-columns: 1fr auto 1fr;
     align-items: center; padding: 14px 28px 12px;
-    background: var(--surface); border-bottom: 1px solid var(--border);
+    background: linear-gradient(135deg, #0a3520, #0a2e18);
+    border-bottom: 2px solid rgba(0,212,200,0.2);
   }
 
   .prop-name { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--accent); letter-spacing: 0.04em; }
@@ -172,21 +176,25 @@
   .nav-card-desc  { font-size: 12px; color: var(--muted); text-align: center; line-height: 1.4; }
   .nav-card-bar   { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; }
 
-  .nav-sorties { background: linear-gradient(135deg, rgba(46,196,182,0.1), transparent); }
-  .nav-sorties .nav-card-bar { background: linear-gradient(90deg, #2ec4b6, #90d4a3); }
-  .nav-sorties .nav-card-title { color: #2ec4b6; }
+  .nav-sorties { background: linear-gradient(135deg, rgba(0,212,200,0.18), rgba(0,212,200,0.04)); border-color: rgba(0,212,200,0.25); }
+  .nav-sorties .nav-card-bar { background: linear-gradient(90deg, #00d4c8, #4ddb80); }
+  .nav-sorties .nav-card-title { color: #00d4c8; }
 
-  .nav-menage { background: linear-gradient(135deg, rgba(244,162,97,0.1), transparent); }
-  .nav-menage .nav-card-bar { background: linear-gradient(90deg, #f4a261, #e9c46a); }
-  .nav-menage .nav-card-title { color: #f4a261; }
+  .nav-menage { background: linear-gradient(135deg, rgba(255,140,58,0.18), rgba(255,140,58,0.04)); border-color: rgba(255,140,58,0.25); }
+  .nav-menage .nav-card-bar { background: linear-gradient(90deg, #ff8c3a, #ffd166); }
+  .nav-menage .nav-card-title { color: #ff8c3a; }
 
-  .nav-jeux { background: linear-gradient(135deg, rgba(233,196,106,0.1), transparent); }
-  .nav-jeux .nav-card-bar { background: linear-gradient(90deg, #e9c46a, #f4a261); }
-  .nav-jeux .nav-card-title { color: #e9c46a; }
+  .nav-jeux { background: linear-gradient(135deg, rgba(255,214,102,0.18), rgba(255,214,102,0.04)); border-color: rgba(255,214,102,0.25); }
+  .nav-jeux .nav-card-bar { background: linear-gradient(90deg, #ffd166, #ff8c3a); }
+  .nav-jeux .nav-card-title { color: #ffd166; }
 
-  .nav-infos { background: linear-gradient(135deg, rgba(144,212,163,0.1), transparent); }
-  .nav-infos .nav-card-bar { background: linear-gradient(90deg, #90d4a3, #2ec4b6); }
-  .nav-infos .nav-card-title { color: #90d4a3; }
+  .nav-video { background: linear-gradient(135deg, rgba(255,85,51,0.18), rgba(255,85,51,0.04)); border-color: rgba(255,85,51,0.25); }
+  .nav-video .nav-card-bar { background: linear-gradient(90deg, #ff5533, #ff8c3a); }
+  .nav-video .nav-card-title { color: #ff5533; }
+
+  .nav-infos { background: linear-gradient(135deg, rgba(77,219,128,0.18), rgba(77,219,128,0.04)); border-color: rgba(77,219,128,0.25); }
+  .nav-infos .nav-card-bar { background: linear-gradient(90deg, #4ddb80, #00d4c8); }
+  .nav-infos .nav-card-title { color: #4ddb80; }
 
   /* FOOTER */
   .bottom-bar {
