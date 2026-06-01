@@ -39,12 +39,12 @@
     border-bottom: 2px solid rgba(0,212,200,0.2);
   }
 
-  .prop-name { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--accent); letter-spacing: 0.04em; }
+  .prop-name { font-family: 'Playfair Display', serif; font-size: 19px; color: var(--accent); letter-spacing: 0.04em; }
 
   .meteo-topbar { display: flex; align-items: center; gap: 10px; }
 
   .alerte-meteo-item {
-    font-size: 10px; font-weight: 500;
+    font-size: 19px; font-weight: 500;
     padding: 2px 8px; border-radius: 10px;
     background: rgba(255,68,34,0.2);
     border: 1px solid rgba(255,68,34,0.4);
@@ -54,13 +54,13 @@
   }
 
   .clock-block { text-align: center; }
-  .clock-time { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 400; line-height: 1; }
-  .clock-date { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 3px; }
+  .clock-time { font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 400; line-height: 1; }
+  .clock-date { font-size: 17px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 3px; }
 
   .wifi-block { text-align: right; }
-  .wifi-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
-  .wifi-ssid  { font-size: 14px; font-weight: 500; }
-  .wifi-pass  { font-size: 12px; color: var(--accent2); }
+  .wifi-label { font-size: 19px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+  .wifi-ssid  { font-size: 17px; font-weight: 500; }
+  .wifi-pass  { font-size: 15px; color: var(--accent2); }
 
   /* CONTENU PRINCIPAL */
   .main-grid {
@@ -81,7 +81,7 @@
   .card-tall { grid-row: 1 / 3; }
 
   .card-label {
-    font-size: 9px; text-transform: uppercase; letter-spacing: 0.14em;
+    font-size: 17px; text-transform: uppercase; letter-spacing: 0.14em;
     color: var(--muted); margin-bottom: 10px;
     display: flex; align-items: center; gap: 8px;
   }
@@ -90,7 +90,7 @@
   .annonce-tag {
     display: inline-block;
     background: rgba(244,162,97,0.15); color: var(--accent);
-    font-size: 10px; padding: 3px 12px; border-radius: 20px;
+    font-size: 19px; padding: 3px 12px; border-radius: 20px;
     border: 1px solid rgba(244,162,97,0.3); margin-bottom: 10px;
     text-transform: uppercase; letter-spacing: 0.08em;
   }
@@ -101,15 +101,15 @@
 
   /* MÉTÉO */
   .meteo-row { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
-  .meteo-icon { font-size: 36px; line-height: 1; }
-  .meteo-temp { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 400; line-height: 1; }
-  .meteo-desc { font-size: 11px; color: var(--muted); margin-top: 3px; }
-  .meteo-extra { display: flex; gap: 12px; margin-top: 8px; font-size: 11px; color: var(--muted); }
+  .meteo-icon { font-size: 44px; line-height: 1; }
+  .meteo-temp { font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 400; line-height: 1; }
+  .meteo-desc { font-size: 17px; color: var(--muted); margin-top: 3px; }
+  .meteo-extra { display: flex; gap: 12px; margin-top: 8px; font-size: 17px; color: var(--muted); }
   .meteo-extra span { color: var(--text); }
 
   /* RÈGLES */
   .rules-list { list-style: none; margin-top: 4px; }
-  .rules-list li { font-size: 11px; color: var(--muted); padding: 5px 0; border-bottom: 1px solid var(--border); line-height: 1.4; }
+  .rules-list li { font-size: 17px; color: var(--muted); padding: 5px 0; border-bottom: 1px solid var(--border); line-height: 1.4; }
   .rules-list li:last-child { border-bottom: none; }
 
   /* BARRE INFO COMPACTE */
@@ -125,18 +125,18 @@
 
   .info-bar-left { display: flex; flex-direction: column; justify-content: center; gap: 6px; }
 
-  .annonce-text-sm { font-size: 14px; font-weight: 300; line-height: 1.4; color: var(--text); }
+  .annonce-text-sm { font-size: 26px; font-weight: 300; line-height: 1.4; color: var(--text); }
 
   .info-bar {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 24px;
+    display: block;
     padding: 12px 28px;
     background: var(--surface);
     border-top: 12px solid var(--bg);
     border-bottom: 1px solid var(--border);
-    align-items: center;
+    width: 100%;
   }
+
+  .info-bar-left { display: flex; flex-direction: column; gap: 6px; width: 100%; }
 
   .info-bar-left {
     display: flex; align-items: center; gap: 12px;
@@ -152,17 +152,17 @@
 
   .info-bar-meteo { display: flex; align-items: center; gap: 10px; border-right: 1px solid var(--border); padding-right: 24px; }
 
-  .meteo-icon-sm { font-size: 28px; line-height: 1; }
-  .meteo-temp-sm { font-family: 'Playfair Display', serif; font-size: 28px; line-height: 1; }
-  .meteo-desc-sm { font-size: 11px; color: var(--muted); margin-top: 2px; }
-  .meteo-extra-sm { font-size: 10px; color: var(--muted); margin-top: 3px; }
+  .meteo-icon-sm { font-size: 44px; line-height: 1; }
+  .meteo-temp-sm { font-family: 'Playfair Display', serif; font-size: 44px; line-height: 1; }
+  .meteo-desc-sm { font-size: 17px; color: var(--muted); margin-top: 2px; }
+  .meteo-extra-sm { font-size: 19px; color: var(--muted); margin-top: 3px; }
   .meteo-extra-sm span { color: var(--text); }
 
   .info-bar-regles { padding-left: 0; }
-  .regles-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 6px; }
+  .regles-label { font-size: 17px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 6px; }
 
   .rules-list-sm { list-style: none; }
-  .rules-list-sm li { font-size: 11px; color: var(--muted); padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,0.04); line-height: 1.3; }
+  .rules-list-sm li { font-size: 17px; color: var(--muted); padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,0.04); line-height: 1.3; }
   .rules-list-sm li:last-child { border-bottom: none; }
 
   /* GRANDES CARTES NAV */
@@ -183,9 +183,9 @@
   }
 
   .nav-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.2); }
-  .nav-card-icon  { font-size: 48px; line-height: 1; }
-  .nav-card-title { font-size: 16px; font-weight: 500; text-align: center; }
-  .nav-card-desc  { font-size: 12px; color: var(--muted); text-align: center; line-height: 1.4; }
+  .nav-card-icon  { font-size: 52px; line-height: 1; }
+  .nav-card-title { font-size: 19px; font-weight: 500; text-align: center; }
+  .nav-card-desc  { font-size: 15px; color: var(--muted); text-align: center; line-height: 1.4; }
   .nav-card-bar   { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; }
 
   .nav-sorties { background: linear-gradient(135deg, rgba(200,240,0,0.18), rgba(0,212,200,0.04)); border-color: rgba(200,240,0,0.25); }
@@ -231,7 +231,7 @@
   .regles-popup-item {
     display: flex; gap: 10px; align-items: flex-start;
     padding: 8px 0; border-bottom: 1px solid var(--border);
-    font-size: 13px; color: var(--text); line-height: 1.5;
+    font-size: 19px; color: var(--text); line-height: 1.5;
   }
   .regles-popup-item:last-child { border-bottom: none; }
 
@@ -241,7 +241,9 @@
     border-top: 1px solid var(--border);
     overflow: hidden;
     white-space: nowrap;
-    padding: 7px 0;
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
   }
 
   .ticker-track {
@@ -259,7 +261,7 @@
   .ticker-item {
     display: inline-block;
     padding: 0 40px;
-    font-size: 13px;
+    font-size: 19px;
     color: var(--accent);
     font-weight: 400;
   }
@@ -268,7 +270,7 @@
     display: inline-block;
     color: var(--muted);
     opacity: 0.4;
-    font-size: 10px;
+    font-size: 19px;
     vertical-align: middle;
   }
 
@@ -279,13 +281,13 @@
     justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
   }
 
-  .checkout-text { font-size: 11px; color: var(--muted); }
-  .checkout-text strong { color: var(--accent); font-size: 13px; }
+  .checkout-text { font-size: 17px; color: var(--muted); }
+  .checkout-text strong { color: var(--accent); font-size: 19px; }
 
   .infos-row { display: flex; gap: 14px; flex-wrap: wrap; }
-  .info-item { font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 5px; }
+  .info-item { font-size: 17px; color: var(--muted); display: flex; align-items: center; gap: 5px; }
   .info-dot  { width: 5px; height: 5px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
-  .info-item .val { color: var(--text); font-size: 11px; }
+  .info-item .val { color: var(--text); font-size: 17px; }
 
   /* ALERTE URGENTE */
   .alerte-overlay {
@@ -339,8 +341,8 @@
   }
   .infos-popup-close { cursor: pointer; font-size: 18px; color: var(--muted); background: none; border: none; color: var(--muted); }
   .infos-popup-list { display: flex; flex-direction: column; gap: 10px; }
-  .infos-popup-item { display: flex; gap: 10px; align-items: center; font-size: 14px; }
-  .infos-popup-label { color: var(--muted); font-size: 12px; min-width: 80px; }
+  .infos-popup-item { display: flex; gap: 10px; align-items: center; font-size: 17px; }
+  .infos-popup-label { color: var(--muted); font-size: 15px; min-width: 80px; }
   .infos-popup-val { color: var(--text); font-weight: 500; }
   .infos-overlay { display: none; position: fixed; top:0;left:0;right:0;bottom:0; background: rgba(0,0,0,0.5); z-index: 39; }
   .infos-overlay.show { display: block; }
@@ -418,37 +420,31 @@
     <a class="nav-card nav-video" href="videos.html">
       <div class="nav-card-icon">🎬</div>
       <div class="nav-card-title">Présentation</div>
-      <div class="nav-card-desc">Vidéo de l'appartement</div>
       <div class="nav-card-bar"></div>
     </a>
     <div class="nav-card nav-regles" onclick="toggleRegles()">
       <div class="nav-card-icon">📋</div>
       <div class="nav-card-title">Les règles du logement</div>
-      <div class="nav-card-desc">Règles du logement</div>
       <div class="nav-card-bar"></div>
     </div>
     <div class="nav-card nav-infos" id="nav-infos-card" onclick="toggleInfos()">
       <div class="nav-card-icon">ℹ️</div>
       <div class="nav-card-title">Infos pratiques</div>
-      <div class="nav-card-desc" id="nav-infos-preview">Urgence, parking...</div>
       <div class="nav-card-bar"></div>
     </div>
     <a class="nav-card nav-sorties" href="sorties.html">
       <div class="nav-card-icon">🗺️</div>
       <div class="nav-card-title">Sorties</div>
-      <div class="nav-card-desc">Idées d'activités en Provence</div>
       <div class="nav-card-bar"></div>
     </a>
     <a class="nav-card nav-jeux" href="jeux.html">
       <div class="nav-card-icon">🎮</div>
       <div class="nav-card-title">Jeux</div>
-      <div class="nav-card-desc">Loup-garou, Undercover...</div>
       <div class="nav-card-bar"></div>
     </a>
     <a class="nav-card nav-menage" href="menage.html">
       <div class="nav-card-icon">🧹</div>
       <div class="nav-card-title">Ménage départ</div>
-      <div class="nav-card-desc">Checklist avant de partir</div>
       <div class="nav-card-bar"></div>
     </a>
   </div>
