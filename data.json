@@ -19,6 +19,18 @@
       "actif": false,
       "texte": "Check-out samedi 10h — laisser les clés sur la table 🗝️",
       "heures": null
+    },
+    {
+      "actif": true,
+      "texte": "Nouveau message"
+    },
+    {
+      "actif": true,
+      "texte": "Nouveau message"
+    },
+    {
+      "actif": true,
+      "texte": "Nouveau message"
     }
   ],
   "wifi": {
@@ -729,5 +741,6 @@
       "driveId": "1FSYR1B455BxExDNCGTiaR-vTIlr4sYe6"
     }
   ],
-  "sectionsPerso": []
+  "sectionsPerso": [],
+  "bandeau": []
 }
