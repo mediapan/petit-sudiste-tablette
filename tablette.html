@@ -238,18 +238,20 @@
 
   /* BANDEAU DÉFILANT */
   .ticker-wrap {
-    background: rgba(18,18,42,0.95);
-    border-top: 1px solid var(--border);
+    background: rgba(255,45,120,0.15);
+    border-top: 2px solid rgba(255,45,120,0.5);
     overflow: hidden;
     white-space: nowrap;
-    padding: 8px 0;
+    padding: 12px 0;
     display: flex;
     align-items: center;
+    min-height: 48px;
   }
 
   .ticker-track {
     display: inline-block;
     animation: ticker 30s linear infinite;
+    line-height: 1.4;
   }
 
   .ticker-track:hover { animation-play-state: paused; }
@@ -262,16 +264,16 @@
   .ticker-item {
     display: inline-block;
     padding: 0 40px;
-    font-size: 19px;
-    color: var(--accent);
-    font-weight: 400;
+    font-size: 20px;
+    font-weight: 500;
+    color: #ffffff;
+    text-shadow: 0 0 12px rgba(255,45,120,0.9);
   }
 
   .ticker-sep {
     display: inline-block;
-    color: var(--muted);
-    opacity: 0.4;
-    font-size: 19px;
+    color: #ff2d78;
+    font-size: 16px;
     vertical-align: middle;
   }
 
@@ -692,10 +694,17 @@
           const bar = document.getElementById('alerte-bar');
           bar.style.animation = 'none'; bar.offsetHeight;
           bar.style.animation = 'progress 30s linear forwards';
-          // Jouer la sonnerie seulement si c'est un nouveau message
-          if (!wasActive) jouerAlerteSound();
+          // Jouer la sonnerie seulement au premier affichage (pas aux rechargements)
+          if (!wasActive && !window._alerteSonnee) {
+            window._alerteSonnee = messageActuel;
+            jouerAlerteSound();
+          }
         } else {
           overlay.classList.remove('active');
+          // Réinitialiser si l'alerte a changé ou été désactivée
+          if (window._alerteSonnee && (!d.alerte?.active || window._alerteSonnee !== messageActuel)) {
+            window._alerteSonnee = null;
+          }
         }
       })
       .catch(() => console.log('Erreur chargement data'));
