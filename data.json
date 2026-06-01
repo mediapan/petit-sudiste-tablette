@@ -1,55 +1,44 @@
 {
   "nom": "Petit Sudiste 13",
   "annonce": {
-    "tag": "Info",
+    "tag": "Bienvenue",
     "texte": "Bienvenue dans l'appartement ! Tout est prêt pour votre séjour. Bonne détente 🌿"
   },
   "messages": [
     {
       "actif": true,
-      "texte": "Bienvenue dans l'appartement ! Tout est prêt pour votre séjour. Bonne détente 🌿",
-      "heures": null
+      "texte": "Bienvenue dans l'appartement ! Tout est prêt pour votre séjour. Bonne détente 🌿"
     },
     {
       "actif": true,
-      "texte": "Wi-Fi disponible — mot de passe affiché en haut à droite 📶",
-      "heures": null
+      "texte": "Wi-Fi disponible — mot de passe affiché en haut à droite 📶"
     },
     {
       "actif": false,
-      "texte": "Check-out samedi 10h — laisser les clés sur la table 🗝️",
-      "heures": null
-    },
-    {
-      "actif": true,
-      "texte": "Nouveau message"
-    },
-    {
-      "actif": true,
-      "texte": "Nouveau message"
-    },
-    {
-      "actif": true,
-      "texte": "Nouveau message"
+      "texte": "Check-out samedi 10h — laisser les clés sur la table 🗝️"
     }
   ],
   "wifi": {
-    "ssid": "Location_airbnb 2,4GHz",
-    "password": "petitsudiste13"
+    "ssid": "PetitSudiste_5G",
+    "password": "motdepasse"
   },
-  "checkout": "Dimanche 11h — Je viendrai pour le check out",
+  "checkout": "Samedi 10h — laisser les clés sur la table",
   "infos": [
     {
       "label": "Urgence",
-      "valeur": "06 01 71 78 36"
+      "valeur": "06 XX XX XX XX"
+    },
+    {
+      "label": "Parking",
+      "valeur": "Place n°1"
     },
     {
       "label": "Poubelles",
-      "valeur": "Tri sélectif, Ordure ménagères, Verre"
+      "valeur": "Lundi matin"
     },
     {
       "label": "Chauffage",
-      "valeur": "Climatisation réversible"
+      "valeur": "Télécommande salon"
     }
   ],
   "regles": [
@@ -89,7 +78,8 @@
   "lon": "5.2483",
   "alerte": {
     "active": false,
-    "message": "\n"
+    "message": "",
+    "lu_le": ""
   },
   "menage": [
     {
@@ -737,11 +727,76 @@
       "driveId": "1FSYR1B455BxExDNCGTiaR-vTIlr4sYe6"
     }
   ],
-  "sectionsPerso": [],
   "bandeau": [
     {
       "actif": true,
-      "texte": "Nous avons fait notre maximum pour vous satisfaire. N'hésitez pas à nous contacter au 06 01 71 78 36 au moindre problème"
+      "texte": "🌿 Bienvenue au Petit Sudiste 13 — Profitez bien de votre séjour !"
+    },
+    {
+      "actif": true,
+      "texte": "🏊 Piscine disponible — Respectez les règles de sécurité"
+    },
+    {
+      "actif": false,
+      "texte": "🗓️ Check-out samedi 10h — Merci de laisser les clés sur la table"
+    }
+  ],
+  "presentation": [
+    {
+      "id": 1,
+      "titre": "Logement",
+      "emoji": "🏠",
+      "desc": "Découvrez votre hébergement pour ce séjour au Petit Sudiste 13.",
+      "driveId": "1FSYR1B455BxExDNCGTiaR-vTIlr4sYe6",
+      "type": "video"
+    },
+    {
+      "id": 2,
+      "titre": "Piscine",
+      "emoji": "🏊",
+      "desc": "Profitez de la piscine chauffée disponible toute l'année.",
+      "driveId": "",
+      "type": "video"
+    },
+    {
+      "id": 3,
+      "titre": "Jacuzzi",
+      "emoji": "🛁",
+      "desc": "Relaxez-vous dans notre jacuzzi privatif.",
+      "driveId": "",
+      "type": "video"
+    },
+    {
+      "id": 4,
+      "titre": "Sauna",
+      "emoji": "🧖",
+      "desc": "Détente garantie dans notre sauna finlandais.",
+      "driveId": "",
+      "type": "video"
+    },
+    {
+      "id": 5,
+      "titre": "Billard",
+      "emoji": "🎱",
+      "desc": "Table de billard disponible pour vos soirées.",
+      "driveId": "",
+      "type": "video"
+    },
+    {
+      "id": 6,
+      "titre": "Tireuse à bière",
+      "emoji": "🍺",
+      "desc": "Profitez de notre tireuse à bière pour vos moments de convivialité.",
+      "driveId": "",
+      "type": "video"
+    },
+    {
+      "id": 7,
+      "titre": "Pétanque",
+      "emoji": "🎯",
+      "desc": "Terrain de pétanque à votre disposition.",
+      "driveId": "",
+      "type": "video"
     }
   ]
 }

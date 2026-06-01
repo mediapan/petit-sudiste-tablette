@@ -501,6 +501,16 @@
     </div>
   </div>
 
+  <!-- PRÉSENTATION -->
+  <div class="section">
+    <div class="section-title">🎬 Présentation — Onglets</div>
+    <div class="card">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:12px;">Chaque onglet peut avoir une vidéo Google Drive. Laisse l'ID vide si pas encore de vidéo.</div>
+      <div id="presentation-list"></div>
+      <button onclick="ajouterOnglet()" style="margin-top:10px;width:100%;padding:8px;background:transparent;border:1px dashed var(--border);border-radius:8px;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;">+ Ajouter un onglet</button>
+    </div>
+  </div>
+
   <!-- SORTIES -->
   <div class="section">
     <div class="section-title">🗺️ Idées de sorties</div>
@@ -706,6 +716,9 @@ function chargerData() {
         }
       }
 
+      // Présentation
+      renderPresentation(d.presentation || []);
+
       // Sorties
       renderSorties(d.sorties || []);
 
@@ -783,6 +796,13 @@ function buildData() {
       actif: document.querySelector(`[data-band-actif="${i}"]`)?.checked ?? b.actif,
       texte: document.querySelector(`[data-band-texte="${i}"]`)?.value || b.texte
     })),
+    presentation: (currentData.presentation || []).map((o, i) => ({
+      ...o,
+      emoji:   document.querySelector(`[data-pres-emoji="${i}"]`)?.value || o.emoji,
+      titre:   document.querySelector(`[data-pres-titre="${i}"]`)?.value || o.titre,
+      driveId: document.querySelector(`[data-pres-drive="${i}"]`)?.value || o.driveId,
+      desc:    document.querySelector(`[data-pres-desc="${i}"]`)?.value || o.desc,
+    })),
     annonce: { tag: 'Info', texte: premierActif.texte },
     wifi: { ssid: document.getElementById('wifi-ssid').value, password: document.getElementById('wifi-pass').value },
     checkout: document.getElementById('adm-checkout').value,
@@ -820,6 +840,44 @@ function buildData() {
       desc_long: document.querySelector(`[data-sortie-desclong="${i}"]`)?.value || s.desc_long
     }))
   };
+}
+
+function renderPresentation(onglets) {
+  const list = document.getElementById('presentation-list');
+  list.innerHTML = '';
+  if (!onglets || onglets.length === 0) {
+    list.innerHTML = '<div style="font-size:12px;color:var(--muted);padding:8px 0;">Aucun onglet</div>';
+    return;
+  }
+  onglets.forEach((o, i) => {
+    const div = document.createElement('div');
+    div.style.cssText = 'padding:12px 0;border-bottom:1px solid var(--border);';
+    div.innerHTML = `
+      <div style="display:flex;gap:8px;margin-bottom:8px;align-items:center;">
+        <input value="${o.emoji||'🎬'}" data-pres-emoji="${i}" style="width:40px;text-align:center;border:1px solid var(--border);border-radius:6px;padding:5px;font-size:16px;background:var(--bg);color:var(--text);">
+        <input value="${o.titre}" data-pres-titre="${i}" placeholder="Titre de l'onglet" style="flex:1;border:1px solid var(--border);border-radius:6px;padding:7px 10px;font-size:13px;font-weight:500;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);">
+        <button onclick="supprimerOnglet(${i})" style="background:rgba(235,87,87,0.15);border:none;color:#eb5757;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:14px;flex-shrink:0;">×</button>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:6px;">
+        <input value="${o.driveId||''}" data-pres-drive="${i}" placeholder="ID Google Drive (ex: 1FSYR1B455Bx...)" style="flex:1;border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:12px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);">
+      </div>
+      <textarea data-pres-desc="${i}" placeholder="Description de cet espace..." style="width:100%;border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:12px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);resize:vertical;min-height:48px;">${o.desc||''}</textarea>`;
+    list.appendChild(div);
+  });
+}
+
+function ajouterOnglet() {
+  if (!currentData) return;
+  if (!currentData.presentation) currentData.presentation = [];
+  const newId = Math.max(0, ...currentData.presentation.map(o => o.id || 0)) + 1;
+  currentData.presentation.push({ id: newId, titre: 'Nouvel onglet', emoji: '📷', desc: '', driveId: '', type: 'video' });
+  renderPresentation(currentData.presentation);
+}
+
+function supprimerOnglet(i) {
+  if (!currentData) return;
+  currentData.presentation.splice(i, 1);
+  renderPresentation(currentData.presentation);
 }
 
 function renderSorties(sorties) {
