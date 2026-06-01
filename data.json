@@ -10,40 +10,18 @@
   },
   "checkout": "Samedi 10h — laisser les clés sur la table",
   "infos": [
-    {
-      "label": "Urgence",
-      "valeur": "06 XX XX XX XX"
-    },
-    {
-      "label": "Parking",
-      "valeur": "Place n°1"
-    },
-    {
-      "label": "Poubelles",
-      "valeur": "Lundi matin"
-    },
-    {
-      "label": "Chauffage",
-      "valeur": "Télécommande salon"
-    }
+    { "label": "Urgence", "valeur": "06 XX XX XX XX" },
+    { "label": "Parking", "valeur": "Place n°1" },
+    { "label": "Poubelles", "valeur": "Lundi matin" },
+    { "label": "Chauffage", "valeur": "Télécommande salon" }
   ],
   "regles": [
-    {
-      "ok": true,
-      "texte": "Animaux acceptés (extérieur)"
-    },
-    {
-      "ok": true,
-      "texte": "Fumeur autorisé en terrasse"
-    },
-    {
-      "ok": true,
-      "texte": "Pas de fêtes / musique après 22h"
-    },
-    {
-      "ok": true,
-      "texte": "Pas de chaussures dans l'appartement"
-    }
+    { "ok": false, "texte": "Animaux interdits" },
+    { "ok": true,  "texte": "Fumeur autorisé en extérieur uniquement (salon de jardin et terrain de pétanque)" },
+    { "ok": false, "texte": "Pas de bruit / musique en extérieur après 22h" },
+    { "ok": false, "texte": "Interdiction de monter sur le bardage de la piscine" },
+    { "ok": false, "texte": "Les enfants sont sous la responsabilité des adultes" },
+    { "ok": false, "texte": "Enceintes et systèmes de son personnels interdits" }
   ],
   "sections": {
     "meteo": true,
@@ -55,7 +33,8 @@
   "lat": "43.5281",
   "lon": "5.2483",
   "alerte": {
-    "active": true,
-    "message": "BRUIT trop fort. m"
+    "active": false,
+    "message": "",
+    "lu_le": ""
   }
 }
