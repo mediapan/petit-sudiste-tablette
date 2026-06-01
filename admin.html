@@ -763,9 +763,14 @@ function buildData() {
     const heuresActif = document.querySelector(`[data-msg-heures-actif="${i}"]`)?.checked;
     const de = document.querySelector(`[data-msg-de="${i}"]`)?.value;
     const a  = document.querySelector(`[data-msg-a="${i}"]`)?.value;
+    // Jours cochés (0=Lun, 6=Dim)
+    const jours = [0,1,2,3,4,5,6].filter(j =>
+      document.querySelector(`[data-msg-jour="${i}-${j}"]`)?.checked
+    );
     return {
       actif: cb.checked,
       texte: msgTextes[i]?.value || '',
+      jours: jours.length > 0 ? jours : [],
       heures: heuresActif ? { de, a } : null
     };
   });
@@ -983,6 +988,15 @@ function renderMessages(messages) {
   const list = document.getElementById('messages-list');
   list.innerHTML = '';
   messages.forEach((msg, i) => {
+    const jours = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+    const joursCoches = (msg.jours || []);
+    const joursHTML = jours.map((j, idx) => `
+      <label style="display:flex;align-items:center;gap:3px;font-size:11px;color:var(--muted);cursor:pointer;">
+        <input type="checkbox" ${joursCoches.includes(idx) ? 'checked' : ''} data-msg-jour="${i}-${idx}"
+          style="width:13px;height:13px;accent-color:var(--accent);">
+        ${j}
+      </label>`).join('');
+
     const div = document.createElement('div');
     div.style.cssText = 'padding:12px 0;border-bottom:1px solid var(--border);';
     div.innerHTML = `
@@ -993,6 +1007,10 @@ function renderMessages(messages) {
           style="flex:1;border:1px solid var(--border);border-radius:6px;padding:7px 10px;font-size:12px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);resize:vertical;min-height:48px;">${msg.texte}</textarea>
         <button onclick="supprimerMessage(${i})" 
           style="background:rgba(235,87,87,0.15);border:none;color:#eb5757;width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:14px;flex-shrink:0;margin-top:2px;">×</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;padding-left:26px;flex-wrap:wrap;margin-bottom:6px;">
+        ${joursHTML}
+        <span style="font-size:10px;color:var(--muted);margin-left:4px;">(vide = tous les jours)</span>
       </div>
       <div style="display:flex;align-items:center;gap:8px;padding-left:26px;">
         <input type="checkbox" ${msg.heures ? 'checked' : ''} data-msg-heures-actif="${i}"
