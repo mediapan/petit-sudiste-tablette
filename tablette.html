@@ -557,7 +557,6 @@
     fetch(DATA_URL + '?t=' + Date.now())
       .then(r => r.json())
       .then(d => {
-        document.getElementById('prop-name').textContent = d.nom;
         document.title = d.nom;
 
         // Messages en défilement avec filtre horaire
