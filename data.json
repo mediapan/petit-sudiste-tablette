@@ -92,8 +92,8 @@
   "lat": "43.5281",
   "lon": "5.2483",
   "alerte": {
-    "active": true,
-    "message": "Trop de bruit en extérieur !!:::^gtj:\n"
+    "active": false,
+    "message": "\n"
   },
   "menage": [
     {
@@ -742,5 +742,10 @@
     }
   ],
   "sectionsPerso": [],
-  "bandeau": []
+  "bandeau": [
+    {
+      "actif": true,
+      "texte": "Nous avons fait notre maximum pour vous satisfaire. N'hésitez pas à nous contacter au 06 01 71 78 36 au moindre problème"
+    }
+  ]
 }
