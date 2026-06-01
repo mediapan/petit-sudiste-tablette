@@ -41,6 +41,18 @@
 
   .prop-name { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--accent); letter-spacing: 0.04em; }
 
+  .meteo-topbar { display: flex; align-items: center; gap: 10px; }
+
+  .alerte-meteo-item {
+    font-size: 10px; font-weight: 500;
+    padding: 2px 8px; border-radius: 10px;
+    background: rgba(255,68,34,0.2);
+    border: 1px solid rgba(255,68,34,0.4);
+    color: #ff6644;
+    margin-top: 3px;
+    display: inline-block;
+  }
+
   .clock-block { text-align: center; }
   .clock-time { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 400; line-height: 1; }
   .clock-date { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 3px; }
@@ -117,13 +129,13 @@
 
   .info-bar {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-    gap: 10px;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
     padding: 12px 28px;
     background: var(--surface);
     border-top: 12px solid var(--bg);
     border-bottom: 1px solid var(--border);
+    align-items: center;
   }
 
   .info-bar-left {
@@ -156,7 +168,7 @@
   /* GRANDES CARTES NAV */
   .nav-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 14px;
     padding: 16px 20px;
   }
@@ -195,6 +207,70 @@
   .nav-infos { background: linear-gradient(135deg, rgba(200,240,0,0.18), rgba(77,219,128,0.04)); border-color: rgba(200,240,0,0.25); }
   .nav-infos .nav-card-bar { background: linear-gradient(90deg, #c8f000, #80ff40); }
   .nav-infos .nav-card-title { color: #c8f000; }
+
+  .nav-regles { background: linear-gradient(135deg, rgba(128,255,64,0.18), rgba(200,240,0,0.04)); border-color: rgba(128,255,64,0.25); }
+  .nav-regles .nav-card-bar { background: linear-gradient(90deg, #80ff40, #c8f000); }
+  .nav-regles .nav-card-title { color: #80ff40; }
+
+  /* POPUP RÈGLES */
+  .regles-popup {
+    display: none; position: fixed;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 20px; padding: 24px 28px;
+    z-index: 40; min-width: 360px; max-width: 500px; max-height: 80vh; overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .regles-popup.show { display: block; }
+  .regles-popup-title {
+    font-family: 'Playfair Display', serif; font-size: 18px;
+    color: var(--green); margin-bottom: 16px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .regles-popup-close { cursor: pointer; font-size: 18px; background: none; border: none; color: var(--muted); }
+  .regles-popup-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 8px 0; border-bottom: 1px solid var(--border);
+    font-size: 13px; color: var(--text); line-height: 1.5;
+  }
+  .regles-popup-item:last-child { border-bottom: none; }
+
+  /* BANDEAU DÉFILANT */
+  .ticker-wrap {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 7px 0;
+  }
+
+  .ticker-track {
+    display: inline-block;
+    animation: ticker 30s linear infinite;
+  }
+
+  .ticker-track:hover { animation-play-state: paused; }
+
+  @keyframes ticker {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .ticker-item {
+    display: inline-block;
+    padding: 0 40px;
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  .ticker-sep {
+    display: inline-block;
+    color: var(--muted);
+    opacity: 0.4;
+    font-size: 10px;
+    vertical-align: middle;
+  }
 
   /* FOOTER */
   .bottom-bar {
@@ -277,6 +353,16 @@
 <div class="leaf leaf-1">🌿</div>
 <div class="leaf leaf-2">🌴</div>
 
+<!-- POPUP RÈGLES -->
+<div class="infos-overlay" id="regles-overlay" onclick="toggleRegles()"></div>
+<div class="regles-popup" id="regles-popup">
+  <div class="regles-popup-title">
+    📋 Règles du logement
+    <button class="regles-popup-close" onclick="toggleRegles()">✕</button>
+  </div>
+  <div id="regles-popup-list"></div>
+</div>
+
 <!-- POPUP INFOS -->
 <div class="infos-overlay" id="infos-overlay" onclick="toggleInfos()"></div>
 <div class="infos-popup" id="infos-popup">
@@ -299,7 +385,16 @@
 <div id="app">
 
   <div class="top-bar">
-    <div class="prop-name" id="prop-name">Petit Sudiste 13</div>
+    <div class="meteo-topbar" id="card-meteo">
+      <div class="meteo-icon-sm" id="meteo-icon">⏳</div>
+      <div>
+        <div class="meteo-temp-sm" id="meteo-temp">--°</div>
+        <div class="meteo-desc-sm" id="meteo-desc">Chargement…</div>
+        <div class="meteo-extra-sm">Vent : <span id="meteo-vent">--</span> · Humidité : <span id="meteo-hum">--</span></div>
+        <div id="meteo-demain" style="display:none;font-size:11px;color:var(--muted);margin-top:3px;"></div>
+        <div id="meteo-alerte" style="display:none;margin-top:6px;"></div>
+      </div>
+    </div>
     <div class="clock-block">
       <div class="clock-time" id="clock-time">--:--</div>
       <div class="clock-date" id="clock-date">---</div>
@@ -315,21 +410,6 @@
     <div class="info-bar-left">
       <div class="annonce-tag" id="annonce-tag">Bienvenue</div>
       <div class="annonce-text-sm" id="annonce-text">Chargement…</div>
-    </div>
-    <div class="info-bar-bottom">
-      <div class="info-bar-meteo" id="card-meteo">
-        <div class="meteo-icon-sm" id="meteo-icon">⏳</div>
-        <div>
-          <div class="meteo-temp-sm" id="meteo-temp">--°</div>
-          <div class="meteo-desc-sm" id="meteo-desc">Chargement…</div>
-          <div class="meteo-extra-sm">Vent : <span id="meteo-vent">--</span> · Humidité : <span id="meteo-hum">--</span></div>
-          <div id="meteo-demain" style="display:none;font-size:11px;color:var(--muted);margin-top:3px;"></div>
-        </div>
-      </div>
-      <div class="info-bar-regles" id="card-regles">
-        <div class="regles-label">Règles</div>
-        <ul class="rules-list-sm" id="rules-list"></ul>
-      </div>
     </div>
   </div>
 
@@ -365,6 +445,12 @@
       <div class="nav-card-desc" id="nav-infos-preview">Urgence, parking...</div>
       <div class="nav-card-bar"></div>
     </div>
+    <div class="nav-card nav-regles" onclick="toggleRegles()">
+      <div class="nav-card-icon">📋</div>
+      <div class="nav-card-title">Les règles du logement</div>
+      <div class="nav-card-desc">Règles du logement</div>
+      <div class="nav-card-bar"></div>
+    </div>
   </div>
 
   <div class="main-grid" style="display:none">
@@ -372,6 +458,11 @@
   </div>
 
   <div id="sections-perso-container"></div>
+
+  <!-- BANDEAU DÉFILANT -->
+  <div class="ticker-wrap" id="ticker-wrap" style="display:none;">
+    <div class="ticker-track" id="ticker-track"></div>
+  </div>
 
   <div class="bottom-bar">
     <div class="checkout-text">Check-out : <strong id="checkout-text">---</strong></div>
@@ -409,12 +500,16 @@
         const icons = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',61:'🌧️',71:'❄️',80:'🌧️',95:'⛈️'};
         const descs = {0:'Ensoleillé',1:'Peu nuageux',2:'Partiellement nuageux',3:'Couvert',45:'Brouillard',51:'Bruine légère',61:'Pluie',71:'Neige',80:'Averses',95:'Orageux'};
         const code = w.weathercode;
+        const temp = Math.round(w.temperature);
+        const vent = Math.round(w.windspeed);
+
         document.getElementById('meteo-icon').textContent = icons[code] || '🌡️';
-        document.getElementById('meteo-temp').textContent = Math.round(w.temperature) + '°';
+        document.getElementById('meteo-temp').textContent = temp + '°';
         document.getElementById('meteo-desc').textContent = (descs[code] || 'Variable') + ' · ' + ville;
-        document.getElementById('meteo-vent').textContent = Math.round(w.windspeed) + ' km/h';
+        document.getElementById('meteo-vent').textContent = vent + ' km/h';
         const hum = d.hourly?.relativehumidity_2m?.[new Date().getHours()] ?? '--';
         document.getElementById('meteo-hum').textContent = hum + '%';
+
         if (d.daily && d.daily.weathercode.length > 1) {
           const codeDemain = d.daily.weathercode[1];
           const maxD = Math.round(d.daily.temperature_2m_max[1]);
@@ -422,8 +517,35 @@
           document.getElementById('meteo-demain').textContent = `Demain : ${icons[codeDemain]||'🌡️'} ${descs[codeDemain]||'Variable'} · ${minD}° / ${maxD}°`;
           document.getElementById('meteo-demain').style.display = 'block';
         }
+
+        // ALERTES AUTOMATIQUES
+        const alertes = [];
+        if (temp >= 38)        alertes.push({ emoji:'🔴', msg:'Canicule extrême — Hydratez-vous, évitez de sortir' });
+        else if (temp >= 35)   alertes.push({ emoji:'🟠', msg:'Forte chaleur — Restez hydratés et à l\'ombre' });
+        else if (temp <= -2)   alertes.push({ emoji:'🔵', msg:'Gel — Prudence sur les routes et les sols' });
+        if (vent >= 100)       alertes.push({ emoji:'🔴', msg:'Tempête violente — Restez à l\'intérieur' });
+        else if (vent >= 70)   alertes.push({ emoji:'🟠', msg:'Vents forts — Évitez les zones exposées' });
+        else if (vent >= 50)   alertes.push({ emoji:'🟡', msg:'Vent soutenu — Prudence en extérieur' });
+        if ([95,96,99].includes(code)) alertes.push({ emoji:'⛈️', msg:'Orages — Évitez les espaces découverts' });
+        if ([71,73,75,77].includes(code)) alertes.push({ emoji:'❄️', msg:'Chutes de neige — Prudence sur les routes' });
+        if ([45,48].includes(code)) alertes.push({ emoji:'🌫️', msg:'Brouillard dense — Réduisez la vitesse' });
+
+        const alertEl = document.getElementById('meteo-alerte');
+        if (alertes.length > 0) {
+          alertEl.innerHTML = alertes.map(a =>
+            `<div class="alerte-meteo-item">${a.emoji} ${a.msg}</div>`
+          ).join('');
+          alertEl.style.display = 'block';
+        } else {
+          alertEl.style.display = 'none';
+        }
       })
       .catch(() => document.getElementById('meteo-desc').textContent = 'Météo indisponible');
+  }
+
+  function toggleRegles() {
+    document.getElementById('regles-popup').classList.toggle('show');
+    document.getElementById('regles-overlay').classList.toggle('show');
   }
 
   function toggleInfos() {
@@ -486,16 +608,14 @@
         }
 
         if (d.sections.regles) {
-          document.getElementById('card-regles').classList.remove('hidden');
-          const ul = document.getElementById('rules-list');
-          ul.innerHTML = '';
+          const popupRegles = document.getElementById('regles-popup-list');
+          popupRegles.innerHTML = '';
           d.regles.forEach(r => {
-            const li = document.createElement('li');
-            li.textContent = r.texte;
-            ul.appendChild(li);
+            const div = document.createElement('div');
+            div.className = 'regles-popup-item';
+            div.innerHTML = `<span style="color:var(--green);flex-shrink:0;">•</span> ${r.texte}`;
+            popupRegles.appendChild(div);
           });
-        } else {
-          document.getElementById('card-regles').classList.add('hidden');
         }
         document.getElementById('checkout-text').textContent = d.checkout;
 
@@ -514,6 +634,18 @@
             pi.innerHTML = `<span class="infos-popup-label">${i.label}</span><span class="infos-popup-val">${i.valeur}</span>`;
             popupList.appendChild(pi);
           });
+        }
+
+        // BANDEAU DÉFILANT
+        const tickerWrap = document.getElementById('ticker-wrap');
+        const tickerTrack = document.getElementById('ticker-track');
+        const bandeaux = (d.bandeau || []).filter(b => b.actif);
+        if (bandeaux.length > 0) {
+          tickerWrap.style.display = 'block';
+          const texte = bandeaux.map(b => `<span class="ticker-item">${b.texte}</span><span class="ticker-sep">✦</span>`).join('');
+          tickerTrack.innerHTML = texte + texte; // double pour boucle continue
+        } else {
+          tickerWrap.style.display = 'none';
         }
 
         // Sections personnalisées
