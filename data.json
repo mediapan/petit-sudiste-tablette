@@ -37,23 +37,19 @@
     "ssid": "Location_airbnb 2,4GHz",
     "password": "petitsudiste13"
   },
-  "checkout": "Samedi 10h — laisser les clés sur la table",
+  "checkout": "Dimanche 11h — Je viendrai pour le check out",
   "infos": [
     {
       "label": "Urgence",
       "valeur": "06 XX XX XX XX"
     },
     {
-      "label": "Parking",
-      "valeur": "Place n°1"
-    },
-    {
       "label": "Poubelles",
-      "valeur": "Lundi matin"
+      "valeur": "Tri sélectif, Ordure ménagères, Verre"
     },
     {
       "label": "Chauffage",
-      "valeur": "Télécommande salon"
+      "valeur": "Climatisation réversible"
     }
   ],
   "regles": [
