@@ -10,18 +10,48 @@
   },
   "checkout": "Samedi 10h — laisser les clés sur la table",
   "infos": [
-    { "label": "Urgence", "valeur": "06 XX XX XX XX" },
-    { "label": "Parking", "valeur": "Place n°1" },
-    { "label": "Poubelles", "valeur": "Lundi matin" },
-    { "label": "Chauffage", "valeur": "Télécommande salon" }
+    {
+      "label": "Urgence",
+      "valeur": "06 XX XX XX XX"
+    },
+    {
+      "label": "Parking",
+      "valeur": "Place n°1"
+    },
+    {
+      "label": "Poubelles",
+      "valeur": "Lundi matin"
+    },
+    {
+      "label": "Chauffage",
+      "valeur": "Télécommande salon"
+    }
   ],
   "regles": [
-    { "ok": false, "texte": "Animaux interdits" },
-    { "ok": true,  "texte": "Fumeur autorisé en extérieur uniquement (salon de jardin et terrain de pétanque)" },
-    { "ok": false, "texte": "Pas de bruit / musique en extérieur après 22h" },
-    { "ok": false, "texte": "Interdiction de monter sur le bardage de la piscine" },
-    { "ok": false, "texte": "Les enfants sont sous la responsabilité des adultes" },
-    { "ok": false, "texte": "Enceintes et systèmes de son personnels interdits" }
+    {
+      "ok": false,
+      "texte": "Animaux interdits"
+    },
+    {
+      "ok": true,
+      "texte": "Fumeur autorisé en extérieur uniquement (salon de jardin et terrain de pétanque)"
+    },
+    {
+      "ok": false,
+      "texte": "Pas de bruit / musique en extérieur après 22h"
+    },
+    {
+      "ok": false,
+      "texte": "Interdiction de monter sur le bardage de la piscine"
+    },
+    {
+      "ok": false,
+      "texte": "Les enfants sont sous la responsabilité des adultes"
+    },
+    {
+      "ok": false,
+      "texte": "Enceintes et systèmes de son personnels interdits"
+    }
   ],
   "sections": {
     "meteo": true,
@@ -34,39 +64,53 @@
   "lon": "5.2483",
   "alerte": {
     "active": false,
-    "message": "",
-    "lu_le": ""
+    "message": ""
   },
   "menage": [
-    { "cat": "🗑️ Poubelles", "items": [
-      "Vider toutes les poubelles de la maison",
-      "Sortir les poubelles et les déposer au point de collecte",
-      "Remettre les poubelles vides à leur place"
-    ]},
-    { "cat": "🍽️ Cuisine", "items": [
-      "Laver et ranger la vaisselle",
-      "Nettoyer le plan de travail et l'évier",
-      "Nettoyer le four / micro-ondes si utilisé",
-      "Vider et nettoyer le réfrigérateur",
-      "Balayer et nettoyer le sol"
-    ]},
-    { "cat": "🛏️ Chambres", "items": [
-      "Retirer les draps et les taies d'oreiller",
-      "Plier les draps et les déposer dans le panier prévu",
-      "Aérer les matelas (laisser fenêtre ouverte)"
-    ]},
-    { "cat": "🚿 Salle de bain", "items": [
-      "Nettoyer la douche / baignoire",
-      "Nettoyer le lavabo et les robinets",
-      "Vider la poubelle de salle de bain",
-      "Essuyer le miroir"
-    ]},
-    { "cat": "🏠 Général", "items": [
-      "Fermer toutes les fenêtres",
-      "Éteindre toutes les lumières",
-      "Vérifier que la climatisation / chauffage est éteint",
-      "Déposer les clés sur la table",
-      "Faire un dernier tour pour vérifier que rien n'est oublié"
-    ]}
+    {
+      "cat": "🗑️ Poubelles",
+      "items": [
+        "Vider toutes les poubelles de la maison",
+        "Sortir les poubelles et les déposer au point de collecte",
+        "Remettre les poubelles vides à leur place"
+      ]
+    },
+    {
+      "cat": "🍽️ Cuisine",
+      "items": [
+        "Laver et ranger la vaisselle",
+        "Nettoyer le plan de travail et l'évier",
+        "Nettoyer le four / micro-ondes si utilisé",
+        "Vider et nettoyer le réfrigérateur",
+        "Balayer et nettoyer le sol"
+      ]
+    },
+    {
+      "cat": "🛏️ Chambres",
+      "items": [
+        "Retirer les draps et les taies d'oreiller",
+        "Plier les draps et les déposer dans le panier prévu",
+        "Aérer les matelas (laisser fenêtre ouverte)"
+      ]
+    },
+    {
+      "cat": "🚿 Salle de bain",
+      "items": [
+        "Nettoyer la douche / baignoire",
+        "Nettoyer le lavabo et les robinets",
+        "Vider la poubelle de salle de bain",
+        "Essuyer le miroir"
+      ]
+    },
+    {
+      "cat": "🏠 Général",
+      "items": [
+        "Fermer toutes les fenêtres",
+        "Éteindre toutes les lumières",
+        "Vérifier que la climatisation / chauffage est éteint",
+        "Déposer les clés sur la table",
+        "Faire un dernier tour pour vérifier que rien n'est oublié"
+      ]
+    }
   ]
 }
