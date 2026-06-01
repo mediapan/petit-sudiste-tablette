@@ -10,16 +10,16 @@
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap');
 
   :root {
-    --bg: #062010;
-    --surface: #0a2e18;
-    --surface2: #0f3d20;
-    --accent: #ff8c3a;
-    --accent2: #00d4c8;
-    --text: #f5f0e8;
-    --muted: #7dbf8e;
-    --border: rgba(255,255,255,0.12);
-    --green: #4ddb80;
-    --red: #ff5533;
+    --bg: #0a1a00;
+    --surface: #122200;
+    --surface2: #1a3300;
+    --accent: #c8f000;
+    --accent2: #ffe000;
+    --text: #f5f5e8;
+    --muted: #a0c060;
+    --border: rgba(200,240,0,0.15);
+    --green: #80ff40;
+    --red: #ff4422;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,7 +27,7 @@
   html, body { width: 100%; height: 100%; background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; overflow: hidden; }
 
   /* Fond dégradé tropical */
-  body { background: radial-gradient(ellipse at top left, #0a3520 0%, #062010 50%, #031508 100%); }
+  body { background: radial-gradient(ellipse at top left, #1a3300 0%, #0a1a00 50%, #050e00 100%); }
 
   #app { display: grid; grid-template-rows: auto auto auto 1fr auto; height: 100vh; width: 100vw; }
 
@@ -176,25 +176,25 @@
   .nav-card-desc  { font-size: 12px; color: var(--muted); text-align: center; line-height: 1.4; }
   .nav-card-bar   { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; }
 
-  .nav-sorties { background: linear-gradient(135deg, rgba(0,212,200,0.18), rgba(0,212,200,0.04)); border-color: rgba(0,212,200,0.25); }
-  .nav-sorties .nav-card-bar { background: linear-gradient(90deg, #00d4c8, #4ddb80); }
-  .nav-sorties .nav-card-title { color: #00d4c8; }
+  .nav-sorties { background: linear-gradient(135deg, rgba(200,240,0,0.18), rgba(0,212,200,0.04)); border-color: rgba(200,240,0,0.25); }
+  .nav-sorties .nav-card-bar { background: linear-gradient(90deg, #c8f000, #80ff40); }
+  .nav-sorties .nav-card-title { color: #c8f000; }
 
-  .nav-menage { background: linear-gradient(135deg, rgba(255,140,58,0.18), rgba(255,140,58,0.04)); border-color: rgba(255,140,58,0.25); }
-  .nav-menage .nav-card-bar { background: linear-gradient(90deg, #ff8c3a, #ffd166); }
-  .nav-menage .nav-card-title { color: #ff8c3a; }
+  .nav-menage { background: linear-gradient(135deg, rgba(255,224,0,0.18), rgba(255,140,58,0.04)); border-color: rgba(255,224,0,0.25); }
+  .nav-menage .nav-card-bar { background: linear-gradient(90deg, #ffe000, #c8f000); }
+  .nav-menage .nav-card-title { color: #ffe000; }
 
-  .nav-jeux { background: linear-gradient(135deg, rgba(255,214,102,0.18), rgba(255,214,102,0.04)); border-color: rgba(255,214,102,0.25); }
-  .nav-jeux .nav-card-bar { background: linear-gradient(90deg, #ffd166, #ff8c3a); }
-  .nav-jeux .nav-card-title { color: #ffd166; }
+  .nav-jeux { background: linear-gradient(135deg, rgba(128,255,64,0.18), rgba(255,214,102,0.04)); border-color: rgba(128,255,64,0.25); }
+  .nav-jeux .nav-card-bar { background: linear-gradient(90deg, #80ff40, #c8f000); }
+  .nav-jeux .nav-card-title { color: #80ff40; }
 
-  .nav-video { background: linear-gradient(135deg, rgba(255,85,51,0.18), rgba(255,85,51,0.04)); border-color: rgba(255,85,51,0.25); }
-  .nav-video .nav-card-bar { background: linear-gradient(90deg, #ff5533, #ff8c3a); }
-  .nav-video .nav-card-title { color: #ff5533; }
+  .nav-video { background: linear-gradient(135deg, rgba(255,224,0,0.18), rgba(255,85,51,0.04)); border-color: rgba(255,224,0,0.25); }
+  .nav-video .nav-card-bar { background: linear-gradient(90deg, #ffe000, #80ff40); }
+  .nav-video .nav-card-title { color: #ffe000; }
 
-  .nav-infos { background: linear-gradient(135deg, rgba(77,219,128,0.18), rgba(77,219,128,0.04)); border-color: rgba(77,219,128,0.25); }
-  .nav-infos .nav-card-bar { background: linear-gradient(90deg, #4ddb80, #00d4c8); }
-  .nav-infos .nav-card-title { color: #4ddb80; }
+  .nav-infos { background: linear-gradient(135deg, rgba(200,240,0,0.18), rgba(77,219,128,0.04)); border-color: rgba(200,240,0,0.25); }
+  .nav-infos .nav-card-bar { background: linear-gradient(90deg, #c8f000, #80ff40); }
+  .nav-infos .nav-card-title { color: #c8f000; }
 
   /* FOOTER */
   .bottom-bar {

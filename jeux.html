@@ -8,186 +8,125 @@
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap');
 
   :root {
-    --bg: #0f1117;
-    --surface: #1a1d27;
-    --accent: #c9a96e;
-    --accent2: #7eb8c9;
-    --text: #f0ede8;
-    --muted: #8b8fa8;
-    --border: rgba(255,255,255,0.08);
+    --bg: #0a1a00;
+    --surface: #122200;
+    --surface2: #1a3300;
+    --accent: #c8f000;
+    --accent2: #ffe000;
+    --text: #f5f5e8;
+    --muted: #a0c060;
+    --border: rgba(200,240,0,0.15);
+    --green: #80ff40;
+    --red: #ff4422;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
 
-  html, body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    min-height: 100vh;
-  }
+  body { background: radial-gradient(ellipse at top left, #0a3520 0%, #062010 50%, #031508 100%); }
 
   .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 18px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 28px;
     background: var(--surface);
     border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 10;
   }
 
-  .header-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    color: var(--accent);
-  }
+  .header-title { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--accent); }
 
   .back-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    color: var(--muted);
-    cursor: pointer;
-    background: none;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 7px 16px;
-    font-family: 'DM Sans', sans-serif;
-    transition: 0.15s;
+    font-size: 13px; color: var(--muted);
+    background: none; border: 1px solid var(--border);
+    border-radius: 20px; padding: 7px 16px;
+    font-family: 'DM Sans', sans-serif; cursor: pointer;
     text-decoration: none;
   }
 
-  .back-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
-
-  .content {
-    padding: 32px;
-    max-width: 900px;
-    margin: 0 auto;
-  }
+  .content { padding: 24px 28px; max-width: 1000px; margin: 0 auto; }
 
   .section-title {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--muted);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--muted); margin-bottom: 16px; margin-top: 28px;
+    display: flex; align-items: center; gap: 10px;
   }
-
-  .section-title::before {
-    content: '';
-    width: 20px; height: 1px;
-    background: var(--accent);
-  }
+  .section-title::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
+  .section-title:first-child { margin-top: 0; }
 
   .games-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 16px;
-    margin-bottom: 40px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 8px;
   }
 
   .game-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 16px;
-    padding: 22px;
-    cursor: pointer;
+    padding: 20px 16px;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 10px; position: relative; overflow: hidden;
     transition: transform 0.15s, border-color 0.15s;
-    text-decoration: none;
-    display: block;
-    position: relative;
-    overflow: hidden;
   }
 
-  .game-card:hover {
-    transform: translateY(-3px);
-    border-color: rgba(255,255,255,0.18);
+  .game-card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.2); }
+
+  .game-emoji { font-size: 40px; line-height: 1; }
+  .game-name  { font-size: 15px; font-weight: 500; text-align: center; color: var(--text); }
+  .game-desc  { font-size: 11px; color: var(--muted); text-align: center; line-height: 1.5; }
+
+  .game-players {
+    font-size: 10px; color: var(--accent2);
+    background: rgba(0,212,200,0.1);
+    border: 1px solid rgba(0,212,200,0.2);
+    padding: 2px 10px; border-radius: 20px;
   }
 
-  .game-emoji {
-    font-size: 38px;
-    margin-bottom: 12px;
-    display: block;
-    line-height: 1;
+  .game-btns { display: flex; gap: 6px; width: 100%; margin-top: 4px; }
+
+  .game-btn {
+    flex: 1; padding: 8px 6px;
+    border-radius: 8px; border: 1px solid var(--border);
+    background: transparent; color: var(--muted);
+    font-family: 'DM Sans', sans-serif; font-size: 11px;
+    cursor: pointer; text-align: center; text-decoration: none;
+    display: flex; align-items: center; justify-content: center; gap: 4px;
+    transition: 0.15s;
   }
 
-  .game-name {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 6px;
-    color: var(--text);
-  }
+  .game-btn:hover { background: rgba(255,255,255,0.05); color: var(--text); }
 
-  .game-desc {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.5;
-    margin-bottom: 14px;
-  }
-
-  .game-tags {
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
-  }
-
-  .tag {
-    font-size: 10px;
-    padding: 3px 9px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-    color: var(--muted);
-  }
-
-  .tag-accent { border-color: rgba(201,169,110,0.3); color: var(--accent); background: rgba(201,169,110,0.08); }
-  .tag-blue   { border-color: rgba(126,184,201,0.3); color: var(--accent2); background: rgba(126,184,201,0.08); }
-
-  .game-bar {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 2px;
-  }
-
-  .bar-gold  { background: linear-gradient(90deg, var(--accent), #e8c98a); }
-  .bar-blue  { background: linear-gradient(90deg, var(--accent2), #a8d8e8); }
-  .bar-green { background: linear-gradient(90deg, #6fcf97, #a8e6c0); }
-  .bar-pink  { background: linear-gradient(90deg, #e88fa8, #f0b8c8); }
-  .bar-purple{ background: linear-gradient(90deg, #b89ae8, #d0c0f0); }
-
-  .players-badge {
-    position: absolute;
-    top: 14px; right: 14px;
-    font-size: 10px;
-    color: var(--muted);
-    background: rgba(255,255,255,0.05);
-    padding: 3px 8px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-  }
-
-  .open-arrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 11px;
+  .game-btn.primary {
+    background: rgba(255,140,58,0.15);
+    border-color: rgba(255,140,58,0.3);
     color: var(--accent);
-    margin-top: 10px;
+    font-weight: 500;
   }
 
-  .footer-note {
-    text-align: center;
-    font-size: 12px;
-    color: var(--muted);
-    padding: 20px;
-    border-top: 1px solid var(--border);
-    margin-top: 20px;
+  .game-btn.installed {
+    background: rgba(77,219,128,0.15);
+    border-color: rgba(77,219,128,0.3);
+    color: var(--green);
+    font-weight: 500;
   }
+
+  .game-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; }
+
+  .note {
+    text-align: center; font-size: 12px; color: var(--muted);
+    padding: 20px; border-top: 1px solid var(--border); margin-top: 20px;
+  }
+
+  .leaf { position: fixed; opacity: 0.04; font-size: 140px; pointer-events: none; z-index: 0; }
+  .leaf-1 { top: -20px; right: -20px; transform: rotate(30deg); }
+  .leaf-2 { bottom: 40px; left: -30px; transform: rotate(-20deg); }
 </style>
 </head>
 <body>
+
+<div class="leaf leaf-1">🌿</div>
+<div class="leaf leaf-2">🌴</div>
 
 <div class="header">
   <div class="header-title">🎮 Jeux</div>
@@ -196,119 +135,145 @@
 
 <div class="content">
 
-  <div class="section-title">Jeux de société — Passer un téléphone</div>
+  <div class="section-title">📱 Applications installées — Ouvrir directement</div>
   <div class="games-grid">
 
-    <a class="game-card" href="https://www.undercoverjeu.fr/" target="_blank">
-      <span class="players-badge">3–12 joueurs</span>
-      <span class="game-emoji">🕵️</span>
+    <div class="game-card">
+      <div class="game-bar" style="background:linear-gradient(90deg,#ff8c3a,#ffd166)"></div>
+      <div class="game-emoji">🕵️</div>
       <div class="game-name">Undercover</div>
-      <div class="game-desc">Chaque joueur reçoit un mot secret. L'espion doit bluffer pour ne pas se faire démasquer. Idéal pour animer une soirée !</div>
-      <div class="game-tags">
-        <span class="tag tag-accent">Sans inscription</span>
-        <span class="tag">Bluff</span>
-        <span class="tag">Famille</span>
+      <div class="game-players">3 – 12 joueurs</div>
+      <div class="game-desc">Chaque joueur reçoit un mot secret. L'espion doit bluffer pour ne pas être démasqué.</div>
+      <div class="game-btns">
+        <a class="game-btn installed" href="intent://com.undercover.game#Intent;scheme=undercover;package=com.undercover.game;end">
+          🚀 Ouvrir
+        </a>
+        <a class="game-btn" href="https://play.google.com/store/apps/details?id=com.undercover.game" target="_blank">
+          ⬇️ Play Store
+        </a>
       </div>
-      <div class="open-arrow">Jouer →</div>
-      <div class="game-bar bar-gold"></div>
-    </a>
+    </div>
 
-    <a class="game-card" href="https://wolfy.net/fr" target="_blank">
-      <span class="players-badge">6–18 joueurs</span>
-      <span class="game-emoji">🐺</span>
-      <div class="game-name">Loup-Garou</div>
-      <div class="game-desc">Le grand classique ! Loups-garous, villageois, voyante… Survivez jusqu'à l'aube ou dévorez le village.</div>
-      <div class="game-tags">
-        <span class="tag tag-blue">En ligne</span>
-        <span class="tag">Déduction</span>
-        <span class="tag">Soirée</span>
+    <div class="game-card">
+      <div class="game-bar" style="background:linear-gradient(90deg,#8b5cf6,#a78bfa)"></div>
+      <div class="game-emoji">🐺</div>
+      <div class="game-name">Wolvesville</div>
+      <div class="game-players">6 – 16 joueurs</div>
+      <div class="game-desc">Loup-Garou en ligne ou en local. Loups, villageois, voyante — survivez jusqu'à l'aube !</div>
+      <div class="game-btns">
+        <a class="game-btn installed" href="intent://wolvesville.com#Intent;scheme=https;package=com.wolvesville.app;end">
+          🚀 Ouvrir
+        </a>
+        <a class="game-btn" href="https://play.google.com/store/apps/details?id=com.wolvesville.app" target="_blank">
+          ⬇️ Play Store
+        </a>
       </div>
-      <div class="open-arrow">Jouer →</div>
-      <div class="game-bar bar-blue"></div>
-    </a>
-
-    <a class="game-card" href="https://garticphone.com/fr" target="_blank">
-      <span class="players-badge">4–30 joueurs</span>
-      <span class="game-emoji">🎨</span>
-      <div class="game-name">Gartic Phone</div>
-      <div class="game-desc">Téléphone arabe version dessin ! Dessine, devine, et éclate de rire face aux interprétations farfelues.</div>
-      <div class="game-tags">
-        <span class="tag tag-accent">Sans inscription</span>
-        <span class="tag">Dessin</span>
-        <span class="tag">Hilarant</span>
-      </div>
-      <div class="open-arrow">Jouer →</div>
-      <div class="game-bar bar-green"></div>
-    </a>
-
-    <a class="game-card" href="https://skribbl.io/?lang=fr" target="_blank">
-      <span class="players-badge">2–8 joueurs</span>
-      <span class="game-emoji">✏️</span>
-      <div class="game-name">Skribbl.io</div>
-      <div class="game-desc">Un joueur dessine, les autres devinent le mot. Le meilleur jeu de dessin multijoueur du web !</div>
-      <div class="game-tags">
-        <span class="tag tag-blue">En ligne</span>
-        <span class="tag">Dessin</span>
-        <span class="tag">Rapide</span>
-      </div>
-      <div class="open-arrow">Jouer →</div>
-      <div class="game-bar bar-pink"></div>
-    </a>
-
-    <a class="game-card" href="https://kahoot.it" target="_blank">
-      <span class="players-badge">2–50 joueurs</span>
-      <span class="game-emoji">🧠</span>
-      <div class="game-name">Kahoot!</div>
-      <div class="game-desc">Quiz multijoueur en temps réel. Créez vos propres questions ou choisissez parmi des milliers de quiz existants.</div>
-      <div class="game-tags">
-        <span class="tag tag-accent">Gratuit</span>
-        <span class="tag">Quiz</span>
-        <span class="tag">Famille</span>
-      </div>
-      <div class="open-arrow">Jouer →</div>
-      <div class="game-bar bar-purple"></div>
-    </a>
-
-    <a class="game-card" href="https://www.geoguessr.com" target="_blank">
-      <span class="players-badge">1–4 joueurs</span>
-      <span class="game-emoji">🌍</span>
-      <div class="game-name">GeoGuessr</div>
-      <div class="game-desc">Où dans le monde êtes-vous ? Explorez Google Street View et devinez votre position sur la planète.</div>
-      <div class="game-tags">
-        <span class="tag tag-blue">Gratuit</span>
-        <span class="tag">Géographie</span>
-        <span class="tag">Exploration</span>
-      </div>
-      <div class="open-arrow">Jouer →</div>
-      <div class="game-bar bar-gold"></div>
-    </a>
+    </div>
 
   </div>
 
-  <div class="section-title">Plateforme — Des centaines de jeux</div>
+  <div class="section-title">🌐 Jeux en ligne — Chacun sur son téléphone</div>
   <div class="games-grid">
 
-    <a class="game-card" href="https://fr.boardgamearena.com" target="_blank">
-      <span class="players-badge">2–16 joueurs</span>
-      <span class="game-emoji">♟️</span>
-      <div class="game-name">Board Game Arena</div>
-      <div class="game-desc">Plus de 1000 jeux de société en ligne : Catan, 7 Wonders, Tarot, Sushi Go et bien plus. Gratuit pour la plupart.</div>
-      <div class="game-tags">
-        <span class="tag tag-accent">1000+ jeux</span>
-        <span class="tag">Stratégie</span>
-        <span class="tag">Classiques</span>
+    <div class="game-card">
+      <div class="game-bar" style="background:linear-gradient(90deg,#00d4c8,#4ddb80)"></div>
+      <div class="game-emoji">🎨</div>
+      <div class="game-name">Gartic Phone</div>
+      <div class="game-players">4 – 30 joueurs</div>
+      <div class="game-desc">Téléphone arabe en dessin. Dessine, devine, et éclate de rire face aux interprétations !</div>
+      <div class="game-btns">
+        <a class="game-btn primary" href="https://garticphone.com/fr" target="_blank">🌐 Jouer</a>
+        <a class="game-btn" href="https://play.google.com/store/apps/details?id=com.innersloth.spacemafia" target="_blank">⬇️ Appli</a>
       </div>
-      <div class="open-arrow">Jouer →</div>
-      <div class="game-bar bar-green"></div>
-    </a>
+    </div>
+
+    <div class="game-card">
+      <div class="game-bar" style="background:linear-gradient(90deg,#ff5533,#ff8c3a)"></div>
+      <div class="game-emoji">🕵️‍♀️</div>
+      <div class="game-name">Spyfall</div>
+      <div class="game-players">3 – 8 joueurs</div>
+      <div class="game-desc">Un espion parmi vous ! Devinez où vous êtes sans vous trahir. Similaire à Undercover.</div>
+      <div class="game-btns">
+        <a class="game-btn primary" href="https://www.spyfall.app/" target="_blank">🌐 Jouer</a>
+      </div>
+    </div>
+
+    <div class="game-card">
+      <div class="game-bar" style="background:linear-gradient(90deg,#ffd166,#ff8c3a)"></div>
+      <div class="game-emoji">🧠</div>
+      <div class="game-name">Kahoot!</div>
+      <div class="game-players">2 – 50 joueurs</div>
+      <div class="game-desc">Quiz multijoueur en temps réel. Créez vos propres questions ou choisissez parmi des milliers de quiz.</div>
+      <div class="game-btns">
+        <a class="game-btn primary" href="https://kahoot.it" target="_blank">🌐 Rejoindre</a>
+        <a class="game-btn" href="https://play.google.com/store/apps/details?id=no.mobitroll.kahoot.android" target="_blank">⬇️ Appli</a>
+      </div>
+    </div>
+
+    <div class="game-card">
+      <div class="game-bar" style="background:linear-gradient(90deg,#4ddb80,#00d4c8)"></div>
+      <div class="game-emoji">🎯</div>
+      <div class="game-name">Psych!</div>
+      <div class="game-players">2 – 8 joueurs</div>
+      <div class="game-desc">Inventez de fausses réponses à de vraies questions et bluffez vos amis pour marquer des points.</div>
+      <div class="game-btns">
+        <a class="game-btn primary" href="https://play.google.com/store/apps/details?id=com.wb.goog.ellen.psych" target="_blank">⬇️ Play Store</a>
+      </div>
+    </div>
+
+    <div class="game-card">
+      <div class="game-bar" style="background:linear-gradient(90deg,#a78bfa,#8b5cf6)"></div>
+      <div class="game-emoji">🎤</div>
+      <div class="game-name">Jackbox Party</div>
+      <div class="game-players">3 – 8 joueurs</div>
+      <div class="game-desc">Party games hilarants : Quiplash, Drawful, Trivia Murder Party... Un joueur lance sur la tablette.</div>
+      <div class="game-btns">
+        <a class="game-btn primary" href="https://jackbox.tv" target="_blank">🌐 Rejoindre</a>
+        <a class="game-btn" href="https://play.google.com/store/search?q=jackbox" target="_blank">⬇️ Play Store</a>
+      </div>
+    </div>
+
+    <div class="game-card">
+      <div class="game-bar" style="background:linear-gradient(90deg,#ff8c3a,#ffd166)"></div>
+      <div class="game-emoji">✏️</div>
+      <div class="game-name">Skribbl.io</div>
+      <div class="game-players">2 – 8 joueurs</div>
+      <div class="game-desc">Un joueur dessine, les autres devinent le mot. Le meilleur jeu de dessin multijoueur du web !</div>
+      <div class="game-btns">
+        <a class="game-btn primary" href="https://skribbl.io" target="_blank">🌐 Jouer</a>
+      </div>
+    </div>
+
+    <div class="game-card">
+      <div class="game-bar" style="background:linear-gradient(90deg,#00d4c8,#4ddb80)"></div>
+      <div class="game-emoji">♟️</div>
+      <div class="game-name">Board Game Arena</div>
+      <div class="game-players">2 – 16 joueurs</div>
+      <div class="game-desc">Plus de 1000 jeux de société : Catan, 7 Wonders, Tarot, Sushi Go. Gratuit pour la plupart.</div>
+      <div class="game-btns">
+        <a class="game-btn primary" href="https://fr.boardgamearena.com" target="_blank">🌐 Jouer</a>
+        <a class="game-btn" href="https://play.google.com/store/apps/details?id=com.boardgamearena.app" target="_blank">⬇️ Appli</a>
+      </div>
+    </div>
+
+    <div class="game-card">
+      <div class="game-bar" style="background:linear-gradient(90deg,#4ddb80,#00d4c8)"></div>
+      <div class="game-emoji">🌍</div>
+      <div class="game-name">GeoGuessr</div>
+      <div class="game-players">1 – 4 joueurs</div>
+      <div class="game-desc">Où dans le monde êtes-vous ? Explorez Google Street View et devinez votre position sur la planète.</div>
+      <div class="game-btns">
+        <a class="game-btn primary" href="https://www.geoguessr.com" target="_blank">🌐 Jouer</a>
+        <a class="game-btn" href="https://play.google.com/store/apps/details?id=com.geoguessr.app" target="_blank">⬇️ Appli</a>
+      </div>
+    </div>
 
   </div>
 
 </div>
 
-<div class="footer-note">
-  Tous les jeux s'ouvrent dans le navigateur · Pas d'installation nécessaire<br>
-  Chaque joueur peut rejoindre depuis son téléphone personnel
+<div class="note">
+  Les boutons 🚀 ouvrent directement l'application si elle est installée · Les boutons ⬇️ mènent au Play Store
 </div>
 
 </body>

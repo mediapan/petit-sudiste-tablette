@@ -10,18 +10,18 @@
   /* ============================================================
      CONFIGURATION — remplace ces valeurs par les tiennes
      ============================================================ */
-  /* Voir la section <script> en bas de page */
+  /* Voir la section JS en bas de page */
   /* ============================================================ */
 
   :root {
-    --accent: #c9a96e;
-    --accent2: #7eb8c9;
+    --accent: #7bc800;
+    --accent2: #c8f000;
     --bg: #f5f4f0;
     --surface: #ffffff;
     --border: #e2e0d8;
     --text: #1a1a1a;
     --muted: #6b6b6b;
-    --green: #27ae60;
+    --green: #5abf00;
     --red: #e74c3c;
     --radius: 12px;
   }
@@ -985,6 +985,8 @@ function supprimerMessage(i) {
   currentData.messages.splice(i, 1);
   renderMessages(currentData.messages);
 }
+
+function toggleAlerteStyle() {
   const card = document.getElementById('alerte-card');
   const active = document.getElementById('tog-alerte').checked;
   card.style.background = active ? 'rgba(235,87,87,0.08)' : '';
