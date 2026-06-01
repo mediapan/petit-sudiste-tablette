@@ -398,6 +398,7 @@
       <div class="meteo-extra">
         Vent : <span id="meteo-vent">--</span> &nbsp; Humidité : <span id="meteo-hum">--</span>
       </div>
+      <div id="meteo-demain" style="display:none; margin-top:8px; font-size:12px; color:var(--muted); padding-top:8px; border-top:1px solid var(--border);"></div>
     </div>
 
     <div class="card" id="card-regles">
@@ -441,7 +442,7 @@
 
   // Météo (Open-Meteo, gratuit, sans clé API)
   function loadMeteo(lat, lon, ville) {
-    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=relativehumidity_2m&wind_speed_unit=kmh`)
+    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=relativehumidity_2m&wind_speed_unit=kmh&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Europe%2FParis`)
       .then(r => r.json())
       .then(d => {
         const w = d.current_weather;
@@ -454,6 +455,18 @@
         document.getElementById('meteo-vent').textContent = Math.round(w.windspeed) + ' km/h';
         const hum = d.hourly?.relativehumidity_2m?.[new Date().getHours()] ?? '--';
         document.getElementById('meteo-hum').textContent = hum + '%';
+
+        // Prévisions demain
+        if (d.daily && d.daily.weathercode.length > 1) {
+          const codeDemain = d.daily.weathercode[1];
+          const maxDemain  = Math.round(d.daily.temperature_2m_max[1]);
+          const minDemain  = Math.round(d.daily.temperature_2m_min[1]);
+          const descDemain = descs[codeDemain] || 'Variable';
+          const iconDemain = icons[codeDemain] || '🌡️';
+          document.getElementById('meteo-demain').textContent =
+            `Demain : ${iconDemain} ${descDemain} · ${minDemain}° / ${maxDemain}°`;
+          document.getElementById('meteo-demain').style.display = 'block';
+        }
       })
       .catch(() => {
         document.getElementById('meteo-desc').textContent = 'Météo indisponible';
@@ -544,7 +557,7 @@
 
   // Confirmation alerte par le locataire
   function confirmerAlerte() {
-    const msgActuel = document.getElementById('alerte-message').textContent;
+    const msgActuel = document.getElementById('alerte-message').textContent || 'Message urgent';
     document.getElementById('alerte-overlay').classList.remove('active');
 
     // Cookie 7 jours
@@ -557,7 +570,7 @@
     emailjs.send('service_oawv7mi', 'template_wuz31w9', {
       message: msgActuel,
       date: date
-    }).catch(() => console.log('Email non envoyé'));
+    }).then(() => console.log('Email envoyé')).catch(() => console.log('Email non envoyé'));
   }
 </script>
 </body>
