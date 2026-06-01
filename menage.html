@@ -7,19 +7,18 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap');
 
-  :root {
-    --bg: #0a1a00;
-    --surface: #122200;
-    --surface2: #1a3300;
-    --text: #f0ede8;
-    --muted: #a0c060;
-    --border: rgba(200,240,0,0.15);
-    --c1: #f4a261; /* orange */
-    --c2: #2ec4b6; /* turquoise */
-    --c3: #e9c46a; /* jaune */
-    --c4: #e76f51; /* corail */
-    --c5: #90d4a3; /* vert clair */
-    --green: #6fcf97;
+    :root {
+    --bg: #0a0a1a;
+    --surface: #12122a;
+    --surface2: #1a1a3a;
+    --accent: #ff2d78;
+    --accent2: #00e5cc;
+    --accent3: #ffe600;
+    --text: #f5f0ff;
+    --muted: #a090c0;
+    --border: rgba(255,45,120,0.2);
+    --green: #00e5cc;
+    --red: #ff2d78;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -47,12 +46,17 @@
   }
 
   .back-btn {
-    font-size: 13px; color: var(--muted);
-    background: none; border: 1px solid var(--border);
-    border-radius: 20px; padding: 7px 16px;
+    font-size: 15px; font-weight: 500;
+    color: white;
+    background: linear-gradient(135deg, #ff2d78, #ff6eb0);
+    border: none;
+    border-radius: 24px; padding: 10px 24px;
     font-family: 'DM Sans', sans-serif; cursor: pointer;
     text-decoration: none;
+    box-shadow: 0 2px 12px rgba(200,240,0,0.3);
+    transition: opacity 0.15s;
   }
+  .back-btn:hover { opacity: 0.85; }
 
   /* PROGRESS */
   .progress-wrap {
@@ -199,18 +203,24 @@
   }
 
   /* FEUILLES DÉCO */
-  .leaf {
-    position: fixed; opacity: 0.06; font-size: 120px;
-    pointer-events: none; z-index: 0;
-  }
-  .leaf-1 { top: -20px; right: -20px; transform: rotate(30deg); }
-  .leaf-2 { bottom: 40px; left: -30px; transform: rotate(-20deg); }
+    .leaf { position:fixed; pointer-events:none; z-index:0; }
+  .leaf-1 { top: 2%;  right: 1%;  font-size: 120px; opacity: 0.15; transform: rotate(10deg); }
+  .leaf-2 { top: 25%; right: 2%;  font-size: 80px;  opacity: 0.12; transform: scaleX(-1); }
+  .leaf-3 { top: 55%; right: 1%;  font-size: 90px;  opacity: 0.12; }
+  .leaf-4 { top: 2%;  left: 1%;   font-size: 110px; opacity: 0.15; transform: rotate(-10deg) scaleX(-1); }
+  .leaf-5 { top: 30%; left: 2%;   font-size: 70px;  opacity: 0.1; }
+  .leaf-6 { top: 60%; left: 1%;   font-size: 85px;  opacity: 0.12; }
 </style>
 </head>
 <body>
+<div class="leaf leaf-1">🌴</div>
+<div class="leaf leaf-2">🦜</div>
+<div class="leaf leaf-3">🌺</div>
+<div class="leaf leaf-4">🌴</div>
+<div class="leaf leaf-5">🌸</div>
+<div class="leaf leaf-6">🦜</div>
 
-<div class="leaf leaf-1">🌿</div>
-<div class="leaf leaf-2">🌴</div>
+
 
 <div class="header">
   <div class="header-title">🧹 Ménage départ</div>

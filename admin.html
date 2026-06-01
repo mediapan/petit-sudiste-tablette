@@ -416,6 +416,15 @@
 
 <div class="content">
 
+  <!-- BANDEAU DÉFILANT -->
+  <div class="section">
+    <div class="section-title">📢 Bandeau défilant (bas de tablette)</div>
+    <div class="card">
+      <div id="bandeau-list"></div>
+      <button onclick="ajouterBandeau()" style="margin-top:10px;width:100%;padding:8px;background:transparent;border:1px dashed var(--border);border-radius:8px;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;">+ Ajouter un message</button>
+    </div>
+  </div>
+
   <!-- MESSAGES -->
   <div class="section">
     <div class="section-title">Messages affichés (défilement toutes les 10 sec)</div>
@@ -666,6 +675,9 @@ function chargerData() {
     .then(d => {
       currentData = d;
 
+      // Bandeau défilant
+      renderBandeau(d.bandeau || []);
+
       // Messages
       if (!d.messages) d.messages = [{ actif: true, texte: d.annonce?.texte || '' }];
       renderMessages(d.messages);
@@ -762,7 +774,10 @@ function buildData() {
 
   return {
     ...currentData,
-    messages,
+    bandeau: (currentData.bandeau || []).map((b, i) => ({
+      actif: document.querySelector(`[data-band-actif="${i}"]`)?.checked ?? b.actif,
+      texte: document.querySelector(`[data-band-texte="${i}"]`)?.value || b.texte
+    })),
     annonce: { tag: 'Info', texte: premierActif.texte },
     wifi: { ssid: document.getElementById('wifi-ssid').value, password: document.getElementById('wifi-pass').value },
     checkout: document.getElementById('adm-checkout').value,
@@ -930,6 +945,38 @@ function reRenderMenage() {
       <button onclick="ajouterTache(${si})" style="margin-top:4px;padding:5px 12px;background:transparent;border:1px dashed var(--border);border-radius:6px;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;">+ Ajouter une tâche</button>`;
     container.appendChild(div);
   });
+}
+
+function renderBandeau(bandeau) {
+  const list = document.getElementById('bandeau-list');
+  list.innerHTML = '';
+  if (!bandeau || bandeau.length === 0) {
+    list.innerHTML = '<div style="font-size:12px;color:var(--muted);padding:8px 0;">Aucun message dans le bandeau</div>';
+    return;
+  }
+  bandeau.forEach((b, i) => {
+    const div = document.createElement('div');
+    div.style.cssText = 'display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);';
+    div.innerHTML = `
+      <label class="toggle"><input type="checkbox" ${b.actif ? 'checked' : ''} data-band-actif="${i}"><span class="tslider"></span></label>
+      <input value="${b.texte}" data-band-texte="${i}" 
+        style="flex:1;border:1px solid var(--border);border-radius:6px;padding:7px 10px;font-size:13px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);">
+      <button onclick="supprimerBandeau(${i})" style="background:rgba(235,87,87,0.15);border:none;color:#eb5757;width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:14px;flex-shrink:0;">×</button>`;
+    list.appendChild(div);
+  });
+}
+
+function ajouterBandeau() {
+  if (!currentData) return;
+  if (!currentData.bandeau) currentData.bandeau = [];
+  currentData.bandeau.push({ actif: true, texte: 'Nouveau message bandeau' });
+  renderBandeau(currentData.bandeau);
+}
+
+function supprimerBandeau(i) {
+  if (!currentData) return;
+  currentData.bandeau.splice(i, 1);
+  renderBandeau(currentData.bandeau);
 }
 
 function renderMessages(messages) {

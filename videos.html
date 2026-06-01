@@ -7,22 +7,23 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap');
 
-  :root {
-    --bg: #0a1a00;
-    --surface: #122200;
-    --surface2: #1a3300;
-    --accent: #c8f000;
-    --accent2: #ffe000;
-    --text: #f5f5e8;
-    --muted: #a0c060;
-    --border: rgba(200,240,0,0.15);
-    --green: #80ff40;
-    --red: #ff4422;
+    :root {
+    --bg: #0a0a1a;
+    --surface: #12122a;
+    --surface2: #1a1a3a;
+    --accent: #ff2d78;
+    --accent2: #00e5cc;
+    --accent3: #ffe600;
+    --text: #f5f0ff;
+    --muted: #a090c0;
+    --border: rgba(255,45,120,0.2);
+    --green: #00e5cc;
+    --red: #ff2d78;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
-  body { background: radial-gradient(ellipse at top left, #0a3520 0%, #062010 50%, #031508 100%); }
+  body { background: linear-gradient(160deg, #0d0030 0%, #0a0a1a 30%, #001a2e 60%, #0d1a00 100%); }
 
   .header {
     display: flex; align-items: center; justify-content: space-between;
@@ -35,12 +36,17 @@
   .header-title { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--accent); }
 
   .back-btn {
-    font-size: 13px; color: var(--muted);
-    background: none; border: 1px solid var(--border);
-    border-radius: 20px; padding: 7px 16px;
+    font-size: 15px; font-weight: 500;
+    color: white;
+    background: linear-gradient(135deg, #ff2d78, #ff6eb0);
+    border: none;
+    border-radius: 24px; padding: 10px 24px;
     font-family: 'DM Sans', sans-serif; cursor: pointer;
     text-decoration: none;
+    box-shadow: 0 2px 12px rgba(200,240,0,0.3);
+    transition: opacity 0.15s;
   }
+  .back-btn:hover { opacity: 0.85; }
 
   .content { padding: 24px 28px; max-width: 1000px; margin: 0 auto; }
 
@@ -49,7 +55,7 @@
     color: var(--muted); margin-bottom: 16px;
     display: flex; align-items: center; gap: 10px;
   }
-  .section-title::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
+  .section-title::before { content: ''; width: 20px; height: 1px; background: linear-gradient(135deg, #ff2d78, #ff6eb0); }
 
   /* VIDÉO PRINCIPALE */
   .video-featured {
@@ -126,15 +132,24 @@
   .video-card-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
   .video-card-desc  { font-size: 12px; color: var(--muted); line-height: 1.4; }
 
-  .leaf { position: fixed; opacity: 0.04; font-size: 140px; pointer-events: none; z-index: 0; }
-  .leaf-1 { top: -20px; right: -20px; transform: rotate(30deg); }
-  .leaf-2 { bottom: 40px; left: -30px; transform: rotate(-20deg); }
+    .leaf { position:fixed; pointer-events:none; z-index:0; }
+  .leaf-1 { top: 2%;  right: 1%;  font-size: 120px; opacity: 0.15; transform: rotate(10deg); }
+  .leaf-2 { top: 25%; right: 2%;  font-size: 80px;  opacity: 0.12; transform: scaleX(-1); }
+  .leaf-3 { top: 55%; right: 1%;  font-size: 90px;  opacity: 0.12; }
+  .leaf-4 { top: 2%;  left: 1%;   font-size: 110px; opacity: 0.15; transform: rotate(-10deg) scaleX(-1); }
+  .leaf-5 { top: 30%; left: 2%;   font-size: 70px;  opacity: 0.1; }
+  .leaf-6 { top: 60%; left: 1%;   font-size: 85px;  opacity: 0.12; }
 </style>
 </head>
 <body>
+<div class="leaf leaf-1">🌴</div>
+<div class="leaf leaf-2">🦜</div>
+<div class="leaf leaf-3">🌺</div>
+<div class="leaf leaf-4">🌴</div>
+<div class="leaf leaf-5">🌸</div>
+<div class="leaf leaf-6">🦜</div>
 
-<div class="leaf leaf-1">🌿</div>
-<div class="leaf leaf-2">🌴</div>
+
 
 <div class="header">
   <div class="header-title">🎬 Vidéos</div>

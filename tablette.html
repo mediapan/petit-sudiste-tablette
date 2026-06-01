@@ -664,8 +664,7 @@
         // ALERTE URGENTE
         const overlay = document.getElementById('alerte-overlay');
         const messageActuel = d.alerte && d.alerte.message ? d.alerte.message : '';
-        const cookieConfirme = document.cookie.split(';').find(c => c.trim().startsWith('alerte_msg='));
-        const msgConfirme = cookieConfirme ? decodeURIComponent(cookieConfirme.split('=')[1].trim()) : '';
+        const msgConfirme = localStorage.getItem('alerte_confirmee_msg') || '';
         if (d.alerte && d.alerte.active && messageActuel && msgConfirme !== messageActuel) {
           document.getElementById('alerte-message').textContent = messageActuel;
           const wasActive = overlay.classList.contains('active');
@@ -731,8 +730,7 @@
     const msgActuel = document.getElementById('alerte-message').textContent || 'Message urgent';
     document.getElementById('alerte-overlay').classList.remove('active');
     stopAlerteSound();
-    const expire = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toUTCString();
-    document.cookie = `alerte_msg=${encodeURIComponent(msgActuel)}; expires=${expire}; path=/`;
+    localStorage.setItem('alerte_confirmee_msg', msgActuel);
     const now = new Date();
     const date = now.toLocaleDateString('fr-FR') + ' à ' + now.toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'});
     emailjs.send('service_oawv7mi', 'template_wuz31w9', { message: msgActuel, date })

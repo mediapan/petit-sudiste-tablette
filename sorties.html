@@ -7,17 +7,18 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap');
 
-  :root {
-    --bg: #0a1a00;
-    --surface: #122200;
-    --surface2: #1a3300;
-    --accent: #c8f000;
-    --accent2: #ffe000;
-    --text: #f5f5e8;
-    --muted: #a0c060;
-    --border: rgba(200,240,0,0.15);
-    --green: #80ff40;
-    --red: #ff4422;
+    :root {
+    --bg: #0a0a1a;
+    --surface: #12122a;
+    --surface2: #1a1a3a;
+    --accent: #ff2d78;
+    --accent2: #00e5cc;
+    --accent3: #ffe600;
+    --text: #f5f0ff;
+    --muted: #a090c0;
+    --border: rgba(255,45,120,0.2);
+    --green: #00e5cc;
+    --red: #ff2d78;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,12 +34,15 @@
   }
   .header-title { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--accent); }
   .back-btn {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 13px; color: var(--muted);
-    background: none; border: 1px solid var(--border);
-    border-radius: 20px; padding: 7px 16px;
+    font-size: 15px; font-weight: 500;
+    color: white;
+    background: linear-gradient(135deg, #ff2d78, #ff6eb0);
+    border: none;
+    border-radius: 24px; padding: 10px 24px;
     font-family: 'DM Sans', sans-serif; cursor: pointer;
-    text-decoration: none; transition: 0.15s;
+    text-decoration: none;
+    box-shadow: 0 2px 12px rgba(200,240,0,0.3);
+    transition: opacity 0.15s;
   }
   .back-btn:hover { color: var(--text); }
 
@@ -61,7 +65,7 @@
     flex-shrink: 0;
   }
   .theme-btn.active {
-    background: var(--accent); border-color: var(--accent);
+    background: linear-gradient(135deg, #ff2d78, #ff6eb0); border-color: var(--accent);
     color: #1a1209; font-weight: 500;
   }
 
@@ -73,7 +77,7 @@
     color: var(--muted); margin-bottom: 18px;
     display: flex; align-items: center; gap: 10px;
   }
-  .section-title::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
+  .section-title::before { content: ''; width: 20px; height: 1px; background: linear-gradient(135deg, #ff2d78, #ff6eb0); }
 
   .cards-grid {
     display: grid;
@@ -189,7 +193,7 @@
 
   .modal-map-btn {
     display: block; width: 100%; padding: 13px;
-    background: var(--accent); color: #1a1209;
+    background: linear-gradient(135deg, #ff2d78, #ff6eb0); color: #1a1209;
     border: none; border-radius: 10px; font-family: 'DM Sans', sans-serif;
     font-size: 14px; font-weight: 500; cursor: pointer; text-align: center;
     text-decoration: none;
@@ -199,6 +203,14 @@
 </style>
 </head>
 <body>
+<div class="leaf leaf-1">🌴</div>
+<div class="leaf leaf-2">🦜</div>
+<div class="leaf leaf-3">🌺</div>
+<div class="leaf leaf-4">🌴</div>
+<div class="leaf leaf-5">🌸</div>
+<div class="leaf leaf-6">🦜</div>
+
+
 
 <div class="header">
   <div class="header-title">🗺️ Idées de sorties</div>
