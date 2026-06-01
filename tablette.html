@@ -683,17 +683,11 @@
   }
 
   let audioCtx = null;
+  let alarmNodes = [];
 
   function initAudio() {
     if (!audioCtx) {
       audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      gain.gain.value = 0;
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.001);
     }
   }
 
@@ -701,35 +695,42 @@
   document.addEventListener('click', initAudio, { once: false });
 
   function jouerAlerteSound() {
-    // Utilise un élément audio avec un son généré en data URI
-    const audio = document.getElementById('alerte-audio');
-    if (audio) {
-      audio.currentTime = 0;
-      audio.play().catch(() => {
-        // Fallback WebAudio
-        try {
-          if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-          if (audioCtx.state === 'suspended') audioCtx.resume();
-          const jouerBip = (freq, start, duration) => {
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.connect(gain); gain.connect(audioCtx.destination);
-            osc.frequency.value = freq; osc.type = 'sine';
-            gain.gain.setValueAtTime(0.7, audioCtx.currentTime + start);
-            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + start + duration);
-            osc.start(audioCtx.currentTime + start);
-            osc.stop(audioCtx.currentTime + start + duration + 0.05);
-          };
-          jouerBip(880, 0.0, 0.25); jouerBip(660, 0.35, 0.25); jouerBip(440, 0.70, 0.45);
-          jouerBip(880, 1.4, 0.25); jouerBip(660, 1.75, 0.25); jouerBip(440, 2.1, 0.45);
-        } catch(e) { console.log('Audio non disponible:', e); }
-      });
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      stopAlerteSound();
+
+      // Alarme continue — boucle de bips
+      let t = audioCtx.currentTime;
+      const duree = 60; // secondes de son continu
+      const bips = [880, 660, 440];
+      for (let i = 0; t + i * 0.4 < audioCtx.currentTime + duree; i++) {
+        const freq = bips[i % bips.length];
+        const osc  = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain); gain.connect(audioCtx.destination);
+        osc.frequency.value = freq; osc.type = 'square';
+        const start = t + i * 0.4;
+        gain.gain.setValueAtTime(0.4, start);
+        gain.gain.exponentialRampToValueAtTime(0.01, start + 0.3);
+        osc.start(start);
+        osc.stop(start + 0.35);
+        alarmNodes.push(osc);
+      }
+    } catch(e) {
+      console.log('Audio non disponible:', e);
     }
+  }
+
+  function stopAlerteSound() {
+    alarmNodes.forEach(n => { try { n.stop(); } catch(e) {} });
+    alarmNodes = [];
   }
 
   function confirmerAlerte() {
     const msgActuel = document.getElementById('alerte-message').textContent || 'Message urgent';
     document.getElementById('alerte-overlay').classList.remove('active');
+    stopAlerteSound();
     const expire = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toUTCString();
     document.cookie = `alerte_msg=${encodeURIComponent(msgActuel)}; expires=${expire}; path=/`;
     const now = new Date();
