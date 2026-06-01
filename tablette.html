@@ -415,16 +415,28 @@
 
   <!-- GRANDES CARTES NAVIGATION -->
   <div class="nav-grid">
+    <a class="nav-card nav-video" href="videos.html">
+      <div class="nav-card-icon">🎬</div>
+      <div class="nav-card-title">Présentation</div>
+      <div class="nav-card-desc">Vidéo de l'appartement</div>
+      <div class="nav-card-bar"></div>
+    </a>
+    <div class="nav-card nav-regles" onclick="toggleRegles()">
+      <div class="nav-card-icon">📋</div>
+      <div class="nav-card-title">Les règles du logement</div>
+      <div class="nav-card-desc">Règles du logement</div>
+      <div class="nav-card-bar"></div>
+    </div>
+    <div class="nav-card nav-infos" id="nav-infos-card" onclick="toggleInfos()">
+      <div class="nav-card-icon">ℹ️</div>
+      <div class="nav-card-title">Infos pratiques</div>
+      <div class="nav-card-desc" id="nav-infos-preview">Urgence, parking...</div>
+      <div class="nav-card-bar"></div>
+    </div>
     <a class="nav-card nav-sorties" href="sorties.html">
       <div class="nav-card-icon">🗺️</div>
       <div class="nav-card-title">Sorties</div>
       <div class="nav-card-desc">Idées d'activités en Provence</div>
-      <div class="nav-card-bar"></div>
-    </a>
-    <a class="nav-card nav-menage" href="menage.html">
-      <div class="nav-card-icon">🧹</div>
-      <div class="nav-card-title">Ménage départ</div>
-      <div class="nav-card-desc">Checklist avant de partir</div>
       <div class="nav-card-bar"></div>
     </a>
     <a class="nav-card nav-jeux" href="jeux.html">
@@ -433,24 +445,12 @@
       <div class="nav-card-desc">Loup-garou, Undercover...</div>
       <div class="nav-card-bar"></div>
     </a>
-    <a class="nav-card nav-video" href="videos.html">
-      <div class="nav-card-icon">🎬</div>
-      <div class="nav-card-title">Présentation</div>
-      <div class="nav-card-desc">Vidéo de l'appartement</div>
+    <a class="nav-card nav-menage" href="menage.html">
+      <div class="nav-card-icon">🧹</div>
+      <div class="nav-card-title">Ménage départ</div>
+      <div class="nav-card-desc">Checklist avant de partir</div>
       <div class="nav-card-bar"></div>
     </a>
-    <div class="nav-card nav-infos" id="nav-infos-card" onclick="toggleInfos()">
-      <div class="nav-card-icon">ℹ️</div>
-      <div class="nav-card-title">Infos pratiques</div>
-      <div class="nav-card-desc" id="nav-infos-preview">Urgence, parking...</div>
-      <div class="nav-card-bar"></div>
-    </div>
-    <div class="nav-card nav-regles" onclick="toggleRegles()">
-      <div class="nav-card-icon">📋</div>
-      <div class="nav-card-title">Les règles du logement</div>
-      <div class="nav-card-desc">Règles du logement</div>
-      <div class="nav-card-bar"></div>
-    </div>
   </div>
 
   <div class="main-grid" style="display:none">
