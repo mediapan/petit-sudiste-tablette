@@ -4,6 +4,20 @@
     "tag": "Bienvenue",
     "texte": "Bienvenue dans l'appartement ! Tout est prêt pour votre séjour. Bonne détente 🌿"
   },
+  "messages": [
+    {
+      "actif": true,
+      "texte": "Bienvenue dans l'appartement ! Tout est prêt pour votre séjour. Bonne détente 🌿"
+    },
+    {
+      "actif": true,
+      "texte": "Wi-Fi disponible — mot de passe affiché en haut à droite 📶"
+    },
+    {
+      "actif": false,
+      "texte": "Check-out samedi 10h — laisser les clés sur la table 🗝️"
+    }
+  ],
   "wifi": {
     "ssid": "PetitSudiste_5G",
     "password": "motdepasse"
@@ -63,8 +77,9 @@
   "lat": "43.5281",
   "lon": "5.2483",
   "alerte": {
-    "active": true,
-    "message": "stop au bruit"
+    "active": false,
+    "message": "",
+    "lu_le": ""
   },
   "menage": [
     {
@@ -111,6 +126,605 @@
         "Déposer les clés sur la table",
         "Faire un dernier tour pour vérifier que rien n'est oublié"
       ]
+    }
+  ],
+  "sorties": [
+    {
+      "id": 1,
+      "theme": "nature",
+      "emoji": "⛰️",
+      "nom": "Sainte-Victoire",
+      "distance": "30 km — Aix-en-Provence",
+      "desc": "La montagne emblématique de Cézanne. Randonnées variées pour tous niveaux, panoramas exceptionnels sur la Provence.",
+      "desc_long": "Immortalisée par Paul Cézanne, la montagne Sainte-Victoire offre des randonnées pour tous niveaux. Le sentier des Venturiers mène au sommet (1011 m) en 3h aller-retour. Vue imprenable sur Aix-en-Provence et la plaine provençale. Prévoir eau et chaussures de rando. Accès gratuit.",
+      "tags": [
+        {
+          "l": "Gratuit",
+          "c": "green"
+        },
+        {
+          "l": "Randonnée",
+          "c": ""
+        },
+        {
+          "l": "Vue panoramique",
+          "c": "gold"
+        }
+      ],
+      "infos": [
+        {
+          "l": "Distance",
+          "v": "30 km"
+        },
+        {
+          "l": "Durée rando",
+          "v": "3h A/R sommet"
+        },
+        {
+          "l": "Difficulté",
+          "v": "Moyen"
+        },
+        {
+          "l": "Parking",
+          "v": "Gratuit au Tholonet"
+        }
+      ],
+      "maps": "https://maps.google.com/?q=Montagne+Sainte-Victoire+Aix-en-Provence"
+    },
+    {
+      "id": 2,
+      "theme": "nature",
+      "emoji": "🦅",
+      "nom": "Massif de la Sainte-Baume",
+      "distance": "35 km — Saint-Zacharie",
+      "desc": "Forêt magique avec une grotte sacrée. Randonnée dans une hêtraie unique en Provence, fraîche même en été.",
+      "desc_long": "La Sainte-Baume abrite une forêt de hêtres unique en Méditerranée. La grotte de Marie-Madeleine est un lieu de pèlerinage perché à 946 m. La randonnée depuis le Plan d'Aups est accessible à tous (1h30 A/R). Fraîcheur garantie même en plein été.",
+      "tags": [
+        {
+          "l": "Fraîcheur",
+          "c": "blue"
+        },
+        {
+          "l": "Spirituel",
+          "c": ""
+        },
+        {
+          "l": "Famille",
+          "c": "green"
+        }
+      ],
+      "infos": [
+        {
+          "l": "Distance",
+          "v": "35 km"
+        },
+        {
+          "l": "Durée",
+          "v": "1h30 A/R"
+        },
+        {
+          "l": "Difficulté",
+          "v": "Facile"
+        },
+        {
+          "l": "Entrée",
+          "v": "Gratuite"
+        }
+      ],
+      "maps": "https://maps.google.com/?q=Massif+Sainte-Baume+Plan+d+Aups"
+    },
+    {
+      "id": 3,
+      "theme": "nature",
+      "emoji": "🌊",
+      "nom": "Calanques de Marseille",
+      "distance": "40 km — Marseille",
+      "desc": "Criques turquoise entre falaises calcaires. L'un des plus beaux parcs nationaux de France, accessible à pied.",
+      "desc_long": "Le Parc National des Calanques offre des paysages à couper le souffle. Calanque de Sormiou et Morgiou accessibles en voiture hors été. En été, accès uniquement à pied depuis Marseille. Baignade possible dans les criques.",
+      "tags": [
+        {
+          "l": "Parc national",
+          "c": "green"
+        },
+        {
+          "l": "Baignade",
+          "c": "blue"
+        },
+        {
+          "l": "Randonnée",
+          "c": ""
+        }
+      ],
+      "infos": [
+        {
+          "l": "Distance",
+          "v": "40 km"
+        },
+        {
+          "l": "Accès été",
+          "v": "À pied depuis Luminy"
+        },
+        {
+          "l": "Difficulté",
+          "v": "Moyen"
+        },
+        {
+          "l": "Baignade",
+          "v": "Possible"
+        }
+      ],
+      "maps": "https://maps.google.com/?q=Calanques+de+Marseille"
+    },
+    {
+      "id": 4,
+      "theme": "nature",
+      "emoji": "🦩",
+      "nom": "Marais de la Camargue",
+      "distance": "50 km — Arles",
+      "desc": "Flamants roses, chevaux blancs et taureaux sauvages. Un écosystème unique entre mer et étangs.",
+      "desc_long": "La Réserve Naturelle de Camargue : 85 000 hectares de marais, étangs et plages sauvages. Flamants roses en liberté, chevaux de Camargue, taureaux sauvages. Le Parc ornithologique de Pont-de-Gau est idéal avec enfants. Prévoir anti-moustiques.",
+      "tags": [
+        {
+          "l": "Flamants roses",
+          "c": "gold"
+        },
+        {
+          "l": "Nature sauvage",
+          "c": "green"
+        },
+        {
+          "l": "Famille",
+          "c": "blue"
+        }
+      ],
+      "infos": [
+        {
+          "l": "Distance",
+          "v": "50 km"
+        },
+        {
+          "l": "Parc ornitho",
+          "v": "7€/adulte"
+        },
+        {
+          "l": "Meilleure saison",
+          "v": "Printemps"
+        },
+        {
+          "l": "Conseil",
+          "v": "Anti-moustiques !"
+        }
+      ],
+      "maps": "https://maps.google.com/?q=Parc+ornithologique+Pont-de-Gau+Camargue"
+    },
+    {
+      "id": 5,
+      "theme": "mer",
+      "emoji": "🏖️",
+      "nom": "Plages de Carry-le-Rouet",
+      "distance": "20 km — Carry-le-Rouet",
+      "desc": "Petite station balnéaire provençale avec plusieurs criques et une belle plage de sable. La plus proche !",
+      "desc_long": "Carry-le-Rouet est la station balnéaire la plus proche. Plusieurs plages : la Grande Plage (sable, surveillée en été), l'Anse du Tambour (calme, familles), et quelques criques rocheuses. Nombreux restaurants de poisson sur le port.",
+      "tags": [
+        {
+          "l": "Le plus proche",
+          "c": "green"
+        },
+        {
+          "l": "Sable & rochers",
+          "c": "blue"
+        },
+        {
+          "l": "Village",
+          "c": "gold"
+        }
+      ],
+      "infos": [
+        {
+          "l": "Distance",
+          "v": "20 km"
+        },
+        {
+          "l": "Plage",
+          "v": "Sable + criques"
+        },
+        {
+          "l": "Surveillée",
+          "v": "Juillet-Août"
+        },
+        {
+          "l": "Parking",
+          "v": "Payant en été"
+        }
+      ],
+      "maps": "https://maps.google.com/?q=Plage+Carry-le-Rouet"
+    },
+    {
+      "id": 6,
+      "theme": "mer",
+      "emoji": "🏝️",
+      "nom": "Côte Bleue",
+      "distance": "25 km — Sausset-les-Pins",
+      "desc": "Littoral sauvage entre Marseille et Martigues. Criques cachées, sentiers côtiers et villages de pêcheurs.",
+      "desc_long": "La Côte Bleue s'étend de Marseille à Martigues le long d'une corniche sauvage. Sausset-les-Pins et Carro sont de charmants villages de pêcheurs. Le sentier du littoral permet de relier les villages à pied en longeant la mer.",
+      "tags": [
+        {
+          "l": "Sentier côtier",
+          "c": "green"
+        },
+        {
+          "l": "Criques",
+          "c": "blue"
+        },
+        {
+          "l": "Villages",
+          "c": "gold"
+        }
+      ],
+      "infos": [
+        {
+          "l": "Distance",
+          "v": "25 km"
+        },
+        {
+          "l": "Sentier",
+          "v": "12 km Sausset→Carro"
+        },
+        {
+          "l": "Baignade",
+          "v": "Possible partout"
+        },
+        {
+          "l": "Parking",
+          "v": "Gratuit hors saison"
+        }
+      ],
+      "maps": "https://maps.google.com/?q=Sentier+littoral+Côte+Bleue+Sausset-les-Pins"
+    },
+    {
+      "id": 7,
+      "theme": "mer",
+      "emoji": "🎣",
+      "nom": "Port de Martigues",
+      "distance": "15 km — Martigues",
+      "desc": "La Venise provençale avec ses canaux colorés. Port de pêche authentique et marché provençal.",
+      "desc_long": "Martigues est surnommée la Venise provençale pour ses canaux et maisons colorées. Marché provençal le jeudi et dimanche matin. Musée Ziem gratuit le weekend. Restaurant de bouillabaisse au bord du canal.",
+      "tags": [
+        {
+          "l": "15 km",
+          "c": "green"
+        },
+        {
+          "l": "Authentique",
+          "c": "gold"
+        },
+        {
+          "l": "Marché",
+          "c": ""
+        }
+      ],
+      "infos": [
+        {
+          "l": "Distance",
+          "v": "15 km"
+        },
+        {
+          "l": "Marché",
+          "v": "Jeudi & Dimanche"
+        },
+        {
+          "l": "Musée Ziem",
+          "v": "Gratuit weekend"
+        },
+        {
+          "l": "Parking",
+          "v": "Gratuit centre"
+        }
+      ],
+      "maps": "https://maps.google.com/?q=Martigues+Venise+Provençale"
+    },
+    {
+      "id": 8,
+      "theme": "culture",
+      "emoji": "🏛️",
+      "nom": "Aix-en-Provence",
+      "distance": "25 km — Aix-en-Provence",
+      "desc": "Ville d'art et d'histoire, cours Mirabeau, musées Cézanne, fontaines et marchés. Incontournable.",
+      "desc_long": "Aix-en-Provence est l'une des plus belles villes du Sud. Le cours Mirabeau, bordé de platanes centenaires, est un chef-d'œuvre. L'atelier Cézanne, le musée Granet et la cathédrale Saint-Sauveur valent la visite. Marché provençal tous les matins place Richelme.",
+      "tags": [
+        {
+          "l": "Incontournable",
+          "c": "gold"
+        },
+        {
+          "l": "Musées",
+          "c": "blue"
+        },
+        {
+          "l": "Gastronomie",
+          "c": ""
+        }
+      ],
+      "infos": [
+        {
+          "l": "Distance",
+          "v": "25 km"
+        },
+        {
+          "l": "Atelier Cézanne",
+          "v": "7,50€"
+        },
+        {
+          "l": "Marché",
+          "v": "Tous les matins"
+        },
+        {
+          "l": "Parking",
+          "v": "Parkings payants"
+        }
+      ],
+      "maps": "https://maps.google.com/?q=Aix-en-Provence+centre"
+    },
+    {
+      "id": 9,
+      "theme": "culture",
+      "emoji": "🏟️",
+      "nom": "Arles antique",
+      "distance": "50 km — Arles",
+      "desc": "Amphithéâtre romain, thermes antiques et musée de l'Arles antique. Van Gogh y vécut aussi !",
+      "desc_long": "Arles est une ville hors du temps, classée UNESCO. Les Arènes romaines accueillent encore des corridas. Le théâtre antique, les thermes de Constantin et le musée de l'Arles Antique complètent la visite.",
+      "tags": [
+        {
+          "l": "UNESCO",
+          "c": "gold"
+        },
+        {
+          "l": "Romain",
+          "c": "blue"
+        },
+        {
+          "l": "Van Gogh",
+          "c": ""
+        }
+      ],
+      "infos": [
+        {
+          "l": "Distance",
+          "v": "50 km"
+        },
+        {
+          "l": "Arènes",
+          "v": "9€"
+        },
+        {
+          "l": "Pass tout inclus",
+          "v": "14€"
+        },
+        {
+          "l": "Durée visite",
+          "v": "Demi-journée"
+        }
+      ],
+      "maps": "https://maps.google.com/?q=Arènes+Arles"
+    },
+    {
+      "id": 10,
+      "theme": "culture",
+      "emoji": "⚓",
+      "nom": "Marseille — MuCEM & Vieux-Port",
+      "distance": "35 km — Marseille",
+      "desc": "Le MuCEM, Notre-Dame-de-la-Garde, le Vieux-Port et la Bonne Mère. La grande ville à portée de main.",
+      "desc_long": "Marseille est à 35 km et vaut le détour. Le MuCEM est un chef-d'œuvre d'architecture. La Bonne Mère offre la vue la plus belle sur la ville. Le Vieux-Port est idéal pour déjeuner face à la mer.",
+      "tags": [
+        {
+          "l": "MuCEM",
+          "c": "blue"
+        },
+        {
+          "l": "Bonne Mère",
+          "c": "gold"
+        },
+        {
+          "l": "Vieux-Port",
+          "c": ""
+        }
+      ],
+      "infos": [
+        {
+          "l": "Distance",
+          "v": "35 km"
+        },
+        {
+          "l": "MuCEM",
+          "v": "11€"
+        },
+        {
+          "l": "Bonne Mère",
+          "v": "Gratuite"
+        },
+        {
+          "l": "Parking",
+          "v": "Vieux-Port"
+        }
+      ],
+      "maps": "https://maps.google.com/?q=MuCEM+Marseille"
+    },
+    {
+      "id": 11,
+      "theme": "culture",
+      "emoji": "🏰",
+      "nom": "Les Baux-de-Provence",
+      "distance": "45 km — Les Baux",
+      "desc": "Village médiéval perché classé parmi les plus beaux de France. Vue à 360° sur les Alpilles.",
+      "desc_long": "Les Baux-de-Provence est l'un des plus beaux villages de France, perché sur un éperon rocheux des Alpilles. Le château médiéval en ruines offre une vue à 360°. La Carrières de Lumières est juste en bas.",
+      "tags": [
+        {
+          "l": "Plus beau village",
+          "c": "gold"
+        },
+        {
+          "l": "Médiéval",
+          "c": "blue"
+        },
+        {
+          "l": "Alpilles",
+          "c": "green"
+        }
+      ],
+      "infos": [
+        {
+          "l": "Distance",
+          "v": "45 km"
+        },
+        {
+          "l": "Château",
+          "v": "10€"
+        },
+        {
+          "l": "Carrières Lumières",
+          "v": "15€"
+        },
+        {
+          "l": "Conseil",
+          "v": "Arriver tôt"
+        }
+      ],
+      "maps": "https://maps.google.com/?q=Les+Baux-de-Provence"
+    },
+    {
+      "id": 12,
+      "theme": "gastro",
+      "emoji": "🫒",
+      "nom": "Marché de Salon-de-Provence",
+      "distance": "20 km — Salon-de-Provence",
+      "desc": "Grand marché provençal du mercredi matin. Huiles d'olive, fromages, olives et produits locaux.",
+      "desc_long": "Le marché de Salon-de-Provence est l'un des plus beaux marchés provençaux. Le mercredi matin, toute la vieille ville se transforme : huiles d'olive des Alpilles, fromages de chèvre, tapenade, miel de lavande.",
+      "tags": [
+        {
+          "l": "Mercredi matin",
+          "c": "gold"
+        },
+        {
+          "l": "Produits locaux",
+          "c": "green"
+        },
+        {
+          "l": "20 km",
+          "c": "blue"
+        }
+      ],
+      "infos": [
+        {
+          "l": "Distance",
+          "v": "20 km"
+        },
+        {
+          "l": "Jour",
+          "v": "Mercredi matin"
+        },
+        {
+          "l": "Horaires",
+          "v": "8h → 13h"
+        },
+        {
+          "l": "Parking",
+          "v": "Gratuit périphérie"
+        }
+      ],
+      "maps": "https://maps.google.com/?q=Marché+Salon-de-Provence"
+    },
+    {
+      "id": 13,
+      "theme": "gastro",
+      "emoji": "🐟",
+      "nom": "Bouillabaisse à Marseille",
+      "distance": "35 km — Marseille",
+      "desc": "La soupe de poisson marseillaise dans son berceau. Un rituel gastronomique incontournable.",
+      "desc_long": "La vraie bouillabaisse se déguste à Marseille, dans les restaurants qui respectent la Charte de la Bouillabaisse. Chez Fonfon, le Miramar ou L'Épuisette sont des valeurs sûres. Compter 50-70€ par personne. Réservation indispensable.",
+      "tags": [
+        {
+          "l": "Gastronomie",
+          "c": "gold"
+        },
+        {
+          "l": "Tradition",
+          "c": ""
+        },
+        {
+          "l": "Réservation requise",
+          "c": "blue"
+        }
+      ],
+      "infos": [
+        {
+          "l": "Distance",
+          "v": "35 km"
+        },
+        {
+          "l": "Prix",
+          "v": "50-70€/pers"
+        },
+        {
+          "l": "Réservation",
+          "v": "Indispensable"
+        },
+        {
+          "l": "Durée",
+          "v": "2-3 heures"
+        }
+      ],
+      "maps": "https://maps.google.com/?q=Restaurant+Bouillabaisse+Marseille+Vallon+des+Auffes"
+    },
+    {
+      "id": 14,
+      "theme": "gastro",
+      "emoji": "🍷",
+      "nom": "Vignobles des Baux-de-Provence",
+      "distance": "40 km — Les Alpilles",
+      "desc": "Dégustation de vins AOC dans les domaines des Alpilles. Rosés et rouges exceptionnels.",
+      "desc_long": "L'AOC Les Baux-de-Provence produit des vins exceptionnels, souvent en agriculture biologique. Le Domaine de Trévallon, le Château Romanin et Mas de la Dame proposent des visites et dégustations. Appeler avant pour réserver.",
+      "tags": [
+        {
+          "l": "Dégustation",
+          "c": "gold"
+        },
+        {
+          "l": "Bio",
+          "c": "green"
+        },
+        {
+          "l": "AOC",
+          "c": ""
+        }
+      ],
+      "infos": [
+        {
+          "l": "Distance",
+          "v": "40 km"
+        },
+        {
+          "l": "Dégustation",
+          "v": "Gratuite à payante"
+        },
+        {
+          "l": "Réservation",
+          "v": "Conseillée"
+        },
+        {
+          "l": "Achat",
+          "v": "Vente directe domaine"
+        }
+      ],
+      "maps": "https://maps.google.com/?q=Vignobles+Les+Baux-de-Provence+Alpilles"
+    }
+  ],
+  "videos": [
+    {
+      "id": 1,
+      "titre": "Présentation de l'appartement",
+      "desc": "Découvrez le Petit Sudiste 13 — votre logement pour ce séjour",
+      "emoji": "🏠",
+      "driveId": "1FSYR1B455BxExDNCGTiaR-vTIlr4sYe6"
     }
   ]
 }

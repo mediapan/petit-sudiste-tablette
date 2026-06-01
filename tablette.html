@@ -353,7 +353,7 @@
       <div class="nav-card-desc">Loup-garou, Undercover...</div>
       <div class="nav-card-bar"></div>
     </a>
-    <a class="nav-card nav-video" href="https://youtu.be/SBsF5gwutT0" target="_blank">
+    <a class="nav-card nav-video" href="videos.html">
       <div class="nav-card-icon">🎬</div>
       <div class="nav-card-title">Présentation</div>
       <div class="nav-card-desc">Vidéo de l'appartement</div>
@@ -371,6 +371,8 @@
     <div class="card card-tall" id="card-annonce-old"></div>
   </div>
 
+  <div id="sections-perso-container"></div>
+
   <div class="bottom-bar">
     <div class="checkout-text">Check-out : <strong id="checkout-text">---</strong></div>
     <div class="infos-row" id="infos-row"></div>
@@ -382,6 +384,10 @@
   const GITHUB_USER = "mediapan";
   const GITHUB_REPO = "petit-sudiste-tablette";
   const DATA_URL = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/main/data.json`;
+
+  function afficherMessage(msg) {
+    document.getElementById('annonce-text').textContent = msg.texte || '';
+  }
 
   function updateClock() {
     const now = new Date();
@@ -431,8 +437,38 @@
       .then(d => {
         document.getElementById('prop-name').textContent = d.nom;
         document.title = d.nom;
-        document.getElementById('annonce-tag').textContent  = d.annonce.tag;
-        document.getElementById('annonce-text').textContent = d.annonce.texte;
+
+        // Messages en défilement avec filtre horaire
+        const now = new Date();
+        const heure = now.getHours() * 60 + now.getMinutes();
+
+        function enPlage(msg) {
+          if (!msg.heures) return true;
+          const [hDe, mDe] = msg.heures.de.split(':').map(Number);
+          const [hA,  mA]  = msg.heures.a.split(':').map(Number);
+          const de = hDe * 60 + mDe;
+          const a  = hA  * 60 + mA;
+          return de <= a ? (heure >= de && heure < a) : (heure >= de || heure < a);
+        }
+
+        const msgs = (d.messages || []).filter(m => m.actif && enPlage(m));
+        if (msgs.length > 0) {
+          window._messages = msgs;
+          if (!window._msgInterval) {
+            window._msgIdx = 0;
+            afficherMessage(msgs[0]);
+            if (msgs.length > 1) {
+              window._msgInterval = setInterval(() => {
+                window._msgIdx = (window._msgIdx + 1) % window._messages.length;
+                afficherMessage(window._messages[window._msgIdx]);
+              }, 10000);
+            }
+          } else {
+            window._messages = msgs;
+          }
+        } else if (d.annonce) {
+          afficherMessage({ texte: d.annonce.texte });
+        }
 
         if (d.sections.wifi) {
           document.getElementById('wifi-ssid').textContent = d.wifi.ssid;
@@ -477,6 +513,22 @@
             pi.className = 'infos-popup-item';
             pi.innerHTML = `<span class="infos-popup-label">${i.label}</span><span class="infos-popup-val">${i.valeur}</span>`;
             popupList.appendChild(pi);
+          });
+        }
+
+        // Sections personnalisées
+        const spContainer = document.getElementById('sections-perso-container');
+        spContainer.innerHTML = '';
+        if (d.sectionsPerso) {
+          d.sectionsPerso.filter(s => s.actif).forEach(s => {
+            const div = document.createElement('div');
+            div.style.cssText = 'background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 18px;margin:0 20px 12px;';
+            div.innerHTML = `
+              <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.14em;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:8px;">
+                <span style="width:18px;height:1px;background:var(--accent);display:inline-block;"></span>${s.titre}
+              </div>
+              <div style="font-size:13px;color:var(--text);line-height:1.6;white-space:pre-wrap;">${s.contenu}</div>`;
+            spContainer.appendChild(div);
           });
         }
 

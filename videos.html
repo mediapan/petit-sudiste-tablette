@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vidéos — Petit Sudiste 13</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap');
+
+  :root {
+    --bg: #062010;
+    --surface: #0a2e18;
+    --accent: #ff8c3a;
+    --accent2: #00d4c8;
+    --text: #f5f0e8;
+    --muted: #7dbf8e;
+    --border: rgba(255,255,255,0.12);
+    --green: #4ddb80;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+  body { background: radial-gradient(ellipse at top left, #0a3520 0%, #062010 50%, #031508 100%); }
+
+  .header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 28px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 10;
+  }
+
+  .header-title { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--accent); }
+
+  .back-btn {
+    font-size: 13px; color: var(--muted);
+    background: none; border: 1px solid var(--border);
+    border-radius: 20px; padding: 7px 16px;
+    font-family: 'DM Sans', sans-serif; cursor: pointer;
+    text-decoration: none;
+  }
+
+  .content { padding: 24px 28px; max-width: 1000px; margin: 0 auto; }
+
+  .section-title {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--muted); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-title::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
+
+  /* VIDÉO PRINCIPALE */
+  .video-featured {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .video-embed {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border: none;
+  }
+
+  .video-info {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .video-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--text);
+  }
+
+  .video-desc {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+
+  /* GRILLE VIDÉOS */
+  .videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+
+  .video-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+
+  .video-card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.2); }
+  .video-card.active { border-color: var(--accent); }
+
+  .video-thumb {
+    width: 100%; aspect-ratio: 16/9;
+    background: linear-gradient(135deg, #0f3d20, #062010);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 48px; position: relative;
+  }
+
+  .play-btn {
+    position: absolute;
+    width: 50px; height: 50px;
+    background: rgba(255,140,58,0.9);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; padding-left: 4px;
+  }
+
+  .video-card-info { padding: 12px 14px; }
+  .video-card-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .video-card-desc  { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+  .leaf { position: fixed; opacity: 0.04; font-size: 140px; pointer-events: none; z-index: 0; }
+  .leaf-1 { top: -20px; right: -20px; transform: rotate(30deg); }
+  .leaf-2 { bottom: 40px; left: -30px; transform: rotate(-20deg); }
+</style>
+</head>
+<body>
+
+<div class="leaf leaf-1">🌿</div>
+<div class="leaf leaf-2">🌴</div>
+
+<div class="header">
+  <div class="header-title">🎬 Vidéos</div>
+  <a class="back-btn" href="tablette.html">← Retour</a>
+</div>
+
+<div class="content">
+
+  <!-- LECTEUR PRINCIPAL -->
+  <div class="video-featured" id="main-player">
+    <iframe class="video-embed" id="main-iframe"
+      src="https://drive.google.com/file/d/1FSYR1B455BxExDNCGTiaR-vTIlr4sYe6/preview"
+      allow="autoplay">
+    </iframe>
+    <div class="video-info">
+      <div>
+        <div class="video-title" id="main-title">Présentation de l'appartement</div>
+        <div class="video-desc" id="main-desc">Découvrez le Petit Sudiste 13 — votre logement pour ce séjour</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LISTE VIDÉOS -->
+  <div class="section-title">Toutes les vidéos</div>
+  <div class="videos-grid" id="videos-grid"></div>
+
+</div>
+
+<script>
+const GITHUB_USER = 'mediapan';
+const GITHUB_REPO = 'petit-sudiste-tablette';
+const DATA_URL = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/main/data.json`;
+
+// Vidéos par défaut (modifiables depuis l'admin plus tard)
+const defaultVideos = [
+  {
+    id: 1,
+    titre: 'Présentation de l\'appartement',
+    desc: 'Découvrez le Petit Sudiste 13 — votre logement pour ce séjour',
+    emoji: '🏠',
+    driveId: '1FSYR1B455BxExDNCGTiaR-vTIlr4sYe6'
+  }
+];
+
+let videos = defaultVideos;
+let videoActive = 0;
+
+function charger() {
+  fetch(DATA_URL + '?t=' + Date.now())
+    .then(r => r.json())
+    .then(d => {
+      if (d.videos && d.videos.length > 0) videos = d.videos;
+      afficher();
+    })
+    .catch(() => afficher());
+}
+
+function afficher() {
+  const grid = document.getElementById('videos-grid');
+  grid.innerHTML = '';
+
+  videos.forEach((v, i) => {
+    const card = document.createElement('div');
+    card.className = 'video-card' + (i === videoActive ? ' active' : '');
+    card.onclick = () => jouer(i);
+    card.innerHTML = `
+      <div class="video-thumb">
+        <span style="font-size:48px;">${v.emoji || '🎬'}</span>
+        <div class="play-btn">▶</div>
+      </div>
+      <div class="video-card-info">
+        <div class="video-card-title">${v.titre}</div>
+        <div class="video-card-desc">${v.desc}</div>
+      </div>`;
+    grid.appendChild(card);
+  });
+
+  // Afficher la première vidéo
+  if (videos.length > 0) jouer(0);
+}
+
+function jouer(i) {
+  videoActive = i;
+  const v = videos[i];
+  document.getElementById('main-iframe').src =
+    `https://drive.google.com/file/d/${v.driveId}/preview`;
+  document.getElementById('main-title').textContent = v.titre;
+  document.getElementById('main-desc').textContent  = v.desc;
+
+  document.querySelectorAll('.video-card').forEach((c, idx) => {
+    c.classList.toggle('active', idx === i);
+  });
+}
+
+charger();
+</script>
+</body>
+</html>
