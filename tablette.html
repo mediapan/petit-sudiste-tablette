@@ -356,6 +356,14 @@
 
   .hidden { display:none !important; }
 </style>
+<link rel="manifest" href="manifest.json">
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+      .then(() => console.log('SW enregistré'))
+      .catch(e => console.log('SW erreur:', e));
+  }
+</script>
 </head>
 <body>
 
